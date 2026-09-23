@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Study Smart — Pathophysiology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F3F6F4;
+    --paper-2:#EAF0ED;
+    --card:#FFFFFF;
+    --ink:#152420;
+    --ink-soft:#4E5F5A;
+    --ink-faint:#8B9C96;
+    --line:#D9E2DD;
+    --teal:#1E6E76;
+    --teal-deep:#144A50;
+    --eosin:#BD5678;
+    --eosin-soft:#F3DCE3;
+    --amber:#C08536;
+    --amber-soft:#F2E3CB;
+    --good:#3D8361;
+    --bad:#BD4B4B;
+    --radius-s:4px;
+    --radius-m:10px;
+  }
+  :root:not([data-theme="light"]){
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#F3F6F4;
+      --paper-2:#EAF0ED;
+      --card:#FFFFFF;
+      --ink:#152420;
+      --ink-soft:#4E5F5A;
+      --ink-faint:#8B9C96;
+      --line:#D9E2DD;
+    }
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    background:var(--paper);
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  body{
+    margin:0;
+    font-family:'IBM Plex Sans',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  ::selection{background:var(--eosin-soft);}
+
+  a{color:inherit;}
+
+  /* ---------- Header ---------- */
+  header.top{
+    padding:env(safe-area-inset-top,0px) 0 0 0;
+    background:
+      linear-gradient(180deg, var(--paper-2), var(--paper) 85%);
+    border-bottom:1px solid var(--line);
+  }
+  .top-inner{
+    max-width:1080px;
+    margin:0 auto;
+    padding:30px 22px 18px;
+  }
+  .eyebrow-row{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .brandmark{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .brandmark .dot{
+    width:11px;height:11px;border-radius:50%;
+    background:conic-gradient(from 210deg, var(--teal), var(--eosin), var(--amber), var(--teal));
+    flex:none;
+  }
+  h1.title{
+    font-family:'Lora',serif;
+    font-weight:700;
+    font-size:clamp(28px,5vw,40px);
+    margin:14px 0 6px;
+    letter-spacing:-0.01em;
+  }
+  p.subtitle{
+    margin:0 0 4px;
+    color:var(--ink-soft);
+    font-size:15px;
+    max-width:56ch;
+  }
+  .source-tag{
+    font-size:12.5px;
+    color:var(--ink-faint);
+    font-family:'IBM Plex Mono',monospace;
+  }
+
+  /* ---------- Nav ---------- */
+  nav.tabs{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 22px;
+    display:flex;
+    gap:4px;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav.tabs::-webkit-scrollbar{display:none;}
+  nav.tabs button{
+    appearance:none;
+    border:none;
+    background:none;
+    font-family:'IBM Plex Sans',sans-serif;
+    font-size:14.5px;
+    font-weight:600;
+    color:var(--ink-faint);
+    padding:14px 14px 13px;
+    cursor:pointer;
+    white-space:nowrap;
+    border-bottom:2.5px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  nav.tabs button .num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    margin-right:7px;
+    color:var(--ink-faint);
+  }
+  nav.tabs button[aria-selected="true"]{
+    color:var(--ink);
+    border-bottom-color:var(--teal);
+  }
+  nav.tabs button[aria-selected="true"] .num{color:var(--teal);}
+  nav.tabs button:hover{color:var(--ink);}
+
+  /* ---------- Main layout ---------- */
+  main{
+    max-width:1080px;
+    margin:0 auto;
+    padding:30px 22px 80px;
+  }
+  section.panel{display:none;}
+  section.panel.active{display:block; animation:fade .35s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+  h2.panel-title{
+    font-family:'Lora',serif;
+    font-size:23px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  p.panel-lede{
+    color:var(--ink-soft);
+    margin:0 0 26px;
+    font-size:14.5px;
+    max-width:64ch;
+  }
+
+  /* ---------- Overview ---------- */
+  .overview-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:0;
+    border-top:1px solid var(--line);
+  }
+  .ov-group{
+    padding:20px 18px 22px 18px;
+    border-bottom:1px solid var(--line);
+    border-right:1px solid var(--line);
+  }
+  .ov-group:nth-child(3n){border-right:none;}
+  .ov-group h3{
+    font-family:'Lora',serif;
+    font-size:15.5px;
+    margin:0 0 12px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .ov-group h3::before{
+    content:"";
+    width:3px;height:15px;
+    background:var(--tone,var(--teal));
+    border-radius:2px;
+    display:inline-block;
+  }
+  .ov-group ul{margin:0; padding:0; list-style:none;}
+  .ov-group li{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    padding:6px 0;
+    border-bottom:1px dashed var(--line);
+  }
+  .ov-group li:last-child{border-bottom:none;}
+  .ov-group li b{color:var(--ink); font-weight:600;}
+
+  /* ---------- Diagrams ---------- */
+  .diagram-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius-m);
+    margin-bottom:22px;
+    overflow:hidden;
+  }
+  .diagram-head{
+    padding:16px 20px 14px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .diagram-head h3{
+    font-family:'Lora',serif;
+    font-size:16.5px;
+    margin:0;
+  }
+  .diagram-head span.tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    color:var(--ink-faint);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:3px 9px;
+  }
+  .diagram-body{padding:20px;}
+  .caption-box{
+    margin-top:16px;
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-left:3px solid var(--teal);
+    border-radius:var(--radius-s);
+    padding:12px 14px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    min-height:20px;
+  }
+  .caption-box .cap-title{color:var(--ink); font-weight:600; display:block; margin-bottom:3px;}
+  .hint{font-size:12px; color:var(--ink-faint); margin-top:8px;}
+
+  /* triad diagram */
+  .triad{position:relative; width:100%; max-width:520px; margin:0 auto; aspect-ratio:1/0.85;}
+  .triad .node{
+    position:absolute;
+    width:110px; height:70px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:13.5px; text-align:center;
+    color:#fff;
+  }
+  .triad .node.host{left:50%; top:8%; transform:translateX(-50%); background:var(--teal);}
+  .triad .node.pathogen{right:2%; bottom:8%; background:var(--eosin);}
+  .triad .node.treatment{left:2%; bottom:8%; background:var(--amber);}
+  .triad button.q{
+    position:absolute;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:20px;
+    font-size:11.5px;
+    font-weight:600;
+    padding:6px 10px;
+    cursor:pointer;
+    color:var(--ink);
+  }
+  .triad button.q:hover{border-color:var(--teal); color:var(--teal);}
+  .triad button.q1{top:32%; left:60%;}
+  .triad button.q2{top:56%; right:8%;}
+  .triad button.q3{bottom:32%; left:24%;}
+  .triad button.q4{top:56%; left:3%;}
+
+  /* tree diagram */
+  .tree-band{margin-bottom:16px;}
+  .tree-band .band-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--ink-faint);
+    margin-bottom:8px;
+    display:block;
+  }
+  .chips{display:flex; flex-wrap:wrap; gap:7px;}
+  .chip{
+    border:1px solid var(--line);
+    background:var(--paper-2);
+    border-radius:20px;
+    padding:6px 12px;
+    font-size:12.5px;
+    font-weight:600;
+    cursor:pointer;
+    color:var(--ink-soft);
+  }
+  .chip:hover{border-color:var(--teal); color:var(--teal-deep);}
+  .chip.active{background:var(--teal); border-color:var(--teal); color:#fff;}
+
+  /* wheel legend */
+  .wheel-wrap{display:flex; gap:26px; align-items:center; flex-wrap:wrap; justify-content:center;}
+  .wheel-ring{
+    width:170px; height:170px; border-radius:50%; flex:none;
+    background:conic-gradient(var(--teal) 0 40%, var(--eosin) 40% 92%, var(--amber) 92% 100%);
+    position:relative;
+    box-shadow:inset 0 0 0 10px var(--card);
+  }
+  .wheel-ring::after{
+    content:"";
+    position:absolute; inset:34px;
+    background:var(--card); border-radius:50%;
+    display:flex;
+  }
+  .legend-list{display:flex; flex-direction:column; gap:8px;}
+  .legend-btn{
+    display:flex; align-items:center; gap:9px;
+    border:1px solid var(--line);
+    background:var(--card);
+    border-radius:var(--radius-s);
+    padding:9px 13px;
+    font-size:13px; font-weight:600;
+    cursor:pointer; color:var(--ink);
+    min-width:190px;
+  }
+  .legend-btn .sw{width:11px; height:11px; border-radius:3px; flex:none;}
+  .legend-btn:hover{border-color:var(--teal);}
+  .legend-btn.active{background:var(--paper-2); border-color:var(--teal);}
+
+  /* iceberg */
+  .iceberg{display:flex; flex-direction:column; align-items:center; gap:2px;}
+  .ice-layer{
+    color:#fff; font-weight:700; font-size:12px;
+    display:flex; align-items:center; justify-content:center;
+    padding:10px 0;
+    cursor:pointer;
+    border:none;
+    width:100%;
+  }
+  .ice-layer:hover{filter:brightness(1.06);}
+  .ice-1{width:16%; background:#1B2A2F; clip-path:polygon(20% 0,80% 0,100% 100%,0 100%);}
+  .ice-2{width:34%; background:var(--eosin); clip-path:polygon(10% 0,90% 0,100% 100%,0 100%);}
+  .ice-3{width:52%; background:var(--amber); clip-path:polygon(8% 0,92% 0,100% 100%,0 100%);}
+  .ice-4{width:70%; background:var(--teal); clip-path:polygon(6% 0,94% 0,100% 100%,0 100%);}
+  .ice-5{width:88%; background:var(--teal-deep); clip-path:polygon(4% 0,96% 0,100% 100%,0 100%);}
+
+  /* epi chart */
+  .epi-chart{width:100%; height:auto;}
+  .epi-toggle{display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;}
+
+  /* table */
+  table.dx-table{width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.dx-table th{
+    text-align:left; font-family:'IBM Plex Mono',monospace; font-size:11px;
+    color:var(--ink-faint); font-weight:600; padding:8px 10px; border-bottom:1px solid var(--line);
+  }
+  table.dx-table td{padding:11px 10px; border-bottom:1px solid var(--line); cursor:pointer;}
+  table.dx-table tr:hover td{background:var(--paper-2);}
+  table.dx-table tr.active td{background:var(--eosin-soft);}
+  table.dx-table td.dtype{font-weight:700; color:var(--teal-deep);}
+
+  /* anemia figure */
+  .anemia-wrap{display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start;}
+  .anemia-silhouette{
+    flex:none; width:96px; height:200px;
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:48px 48px 20px 20px;
+    position:relative;
+  }
+  .anemia-silhouette::before{
+    content:""; position:absolute; top:14px; left:50%; transform:translateX(-50%);
+    width:38px; height:38px; border-radius:50%; background:var(--card); border:1px solid var(--line);
+  }
+  .region-chips{display:flex; flex-wrap:wrap; gap:7px; flex:1; min-width:220px;}
+
+  /* ---------- Topics outline ---------- */
+  .topics-tree{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius-m);
+    padding:24px 26px 28px;
+  }
+  .tp-main{
+    font-family:'Lora',serif;
+    font-weight:700;
+    font-size:18px;
+    color:var(--teal-deep);
+    padding-bottom:12px;
+    margin-bottom:14px;
+    border-bottom:1px solid var(--line);
+  }
+  ol.tp-list{
+    list-style:none;
+    margin:0; padding:0;
+    counter-reset:tp-count;
+  }
+  ol.tp-list > li{
+    counter-increment:tp-count;
+    font-weight:600;
+    font-size:15px;
+    color:var(--ink);
+    padding:10px 0 10px 34px;
+    position:relative;
+    border-bottom:1px dashed var(--line);
+  }
+  ol.tp-list > li:last-child{border-bottom:none;}
+  ol.tp-list > li::before{
+    content:counter(tp-count);
+    position:absolute; left:0; top:9px;
+    width:22px; height:22px; border-radius:6px;
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    color:var(--teal-deep);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+  }
+  ol.tp-sub{
+    list-style:none;
+    margin:9px 0 2px;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  ol.tp-sub > li{
+    font-weight:500;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    padding-left:16px;
+    position:relative;
+  }
+  ol.tp-sub > li::before{
+    content:"–";
+    position:absolute; left:0; color:var(--ink-faint);
+  }
+  ol.tp-subsub{
+    list-style:none;
+    margin:6px 0 2px;
+    padding:0 0 0 4px;
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+  }
+  ol.tp-subsub > li{
+    font-weight:400;
+    font-size:12.5px;
+    color:var(--ink-faint);
+    padding-left:16px;
+    position:relative;
+  }
+  ol.tp-subsub > li::before{
+    content:"·";
+    position:absolute; left:0; color:var(--ink-faint);
+  }
+
+
+  /* ---------- Mini map ---------- */
+  .minimap{display:grid; grid-template-columns:260px 1fr; gap:22px;}
+  @media (max-width:680px){.minimap{grid-template-columns:1fr;}}
+  .mm-list{border-top:1px solid var(--line);}
+  .mm-item{
+    display:block; width:100%; text-align:left;
+    background:none; border:none; border-bottom:1px solid var(--line);
+    padding:12px 4px; cursor:pointer;
+    font-size:13.5px; font-weight:600; color:var(--ink-soft);
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .mm-item:hover{color:var(--teal-deep);}
+  .mm-item.active{color:var(--teal-deep);}
+  .mm-item.active .mm-ico{background:var(--teal); color:#fff;}
+  .mm-ico{
+    font-family:'IBM Plex Mono',monospace; font-size:10px;
+    width:20px; height:20px; border-radius:5px;
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--line); color:var(--ink-faint); flex:none;
+  }
+  .mm-detail{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius-m);
+    padding:22px 24px;
+    min-height:260px;
+    position:sticky; top:16px;
+  }
+  .mm-detail h3{
+    font-family:'Lora',serif; font-size:18px; margin:0 0 10px;
+  }
+  .mm-detail p{font-size:14px; color:var(--ink-soft); margin:0 0 10px;}
+  .mm-detail .placeholder{color:var(--ink-faint); font-size:13.5px;}
+  .mm-detail ul{margin:8px 0 0; padding-left:18px; font-size:13.5px; color:var(--ink-soft);}
+
+  /* ---------- Flashcards ---------- */
+  .fc-toolbar{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px;}
+  .fc-filter{
+    border:1px solid var(--line); background:var(--card); border-radius:20px;
+    padding:6px 13px; font-size:12.5px; font-weight:600; color:var(--ink-soft); cursor:pointer;
+  }
+  .fc-filter.active{background:var(--teal-deep); border-color:var(--teal-deep); color:#fff;}
+  .fc-count{font-size:12.5px; color:var(--ink-faint); margin-bottom:14px;}
+  .fc-grid{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px;
+  }
+  .fc-card{
+    perspective:1200px; height:150px; cursor:pointer;
+  }
+  .fc-inner{
+    position:relative; width:100%; height:100%;
+    transform-style:preserve-3d; transition:transform .5s cubic-bezier(.4,.1,.2,1);
+  }
+  .fc-card.flipped .fc-inner{transform:rotateY(180deg);}
+  .fc-face{
+    position:absolute; inset:0; backface-visibility:hidden;
+    border-radius:var(--radius-s); border:1px solid var(--line);
+    padding:14px; display:flex; flex-direction:column;
+  }
+  .fc-front{background:var(--card);}
+  .fc-back{background:var(--teal-deep); color:#fff; transform:rotateY(180deg); border-color:var(--teal-deep);}
+  .fc-tab{
+    font-family:'IBM Plex Mono',monospace; font-size:9.5px; text-transform:uppercase;
+    letter-spacing:.03em; margin-bottom:8px; color:var(--ink-faint);
+  }
+  .fc-back .fc-tab{color:rgba(255,255,255,.6);}
+  .fc-term{font-family:'Lora',serif; font-weight:600; font-size:16.5px; margin-top:auto; margin-bottom:auto;}
+  .fc-def{font-size:12.5px; line-height:1.45; margin-top:auto; margin-bottom:auto; overflow-y:auto;}
+  .fc-flip-hint{font-size:10.5px; color:var(--ink-faint); align-self:flex-end;}
+  .fc-back .fc-flip-hint{color:rgba(255,255,255,.55);}
+
+  /* ---------- Quiz ---------- */
+  .quiz-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;}
+  .quiz-progress{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-faint);}
+  .quiz-score{font-size:12.5px; font-weight:600; color:var(--teal-deep);}
+  .progress-track{height:4px; background:var(--line); border-radius:3px; overflow:hidden; margin-bottom:22px;}
+  .progress-fill{height:100%; background:var(--teal); width:0%; transition:width .3s ease;}
+  .quiz-card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius-m);
+    padding:26px 24px;
+  }
+  .quiz-q{font-family:'Lora',serif; font-size:18px; font-weight:600; margin:0 0 20px;}
+  .quiz-options{display:flex; flex-direction:column; gap:9px;}
+  .quiz-opt{
+    text-align:left; border:1px solid var(--line); background:var(--paper);
+    border-radius:var(--radius-s); padding:12px 15px; font-size:14px; cursor:pointer;
+    display:flex; gap:10px; align-items:flex-start;
+  }
+  .quiz-opt .letter{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; font-weight:700;
+    color:var(--ink-faint); flex:none; margin-top:1px;
+  }
+  .quiz-opt:hover:not(.locked){border-color:var(--teal);}
+  .quiz-opt.correct{background:#E4F3EA; border-color:var(--good); color:#20502F;}
+  .quiz-opt.correct .letter{color:var(--good);}
+  .quiz-opt.wrong{background:#FBE9E9; border-color:var(--bad); color:#6E2323;}
+  .quiz-opt.wrong .letter{color:var(--bad);}
+  .quiz-foot{display:flex; justify-content:space-between; align-items:center; margin-top:20px; flex-wrap:wrap; gap:10px;}
+  .quiz-btn{
+    border:1px solid var(--teal-deep); background:var(--teal-deep); color:#fff;
+    padding:10px 18px; border-radius:var(--radius-s); font-size:13.5px; font-weight:600; cursor:pointer;
+  }
+  .quiz-btn:disabled{opacity:.35; cursor:not-allowed;}
+  .quiz-btn.ghost{background:none; color:var(--teal-deep);}
+  .quiz-feedback{font-size:12.5px; color:var(--ink-faint); min-height:16px;}
+  .quiz-jump{display:flex; flex-wrap:wrap; gap:5px; margin-top:22px;}
+  .quiz-jump button{
+    width:26px; height:26px; border-radius:5px; border:1px solid var(--line); background:var(--card);
+    font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ink-faint); cursor:pointer;
+  }
+  .quiz-jump button.done{background:var(--paper-2); color:var(--ink-soft);}
+  .quiz-jump button.current{border-color:var(--teal); color:var(--teal-deep); font-weight:700;}
+  .quiz-summary{text-align:center; padding:30px 10px;}
+  .quiz-summary .big{font-family:'Lora',serif; font-size:42px; font-weight:700; color:var(--teal-deep);}
+
+  /* ---------- High Yield ---------- */
+  .hy-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:14px;
+  }
+  .hy-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:3px solid var(--eosin);
+    border-radius:var(--radius-s);
+    padding:16px 18px;
+  }
+  .hy-card.tone-teal{border-left-color:var(--teal);}
+  .hy-card.tone-amber{border-left-color:var(--amber);}
+  .hy-top{display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:8px;}
+  .hy-tag{
+    font-family:'IBM Plex Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:.04em;
+    color:var(--eosin); font-weight:700;
+  }
+  .tone-teal .hy-tag{color:var(--teal-deep);}
+  .tone-amber .hy-tag{color:var(--amber);}
+  .hy-star{font-size:12px; color:var(--amber);}
+  .hy-card h4{
+    font-family:'Lora',serif; font-size:15.5px; margin:0 0 6px; font-weight:600;
+  }
+  .hy-card p{font-size:13px; color:var(--ink-soft); margin:0; line-height:1.5;}
+  .hy-card p b{color:var(--ink); font-weight:600;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:22px;
+    text-align:center;
+    font-size:12px;
+    color:var(--ink-faint);
+    padding-bottom:calc(22px + env(safe-area-inset-bottom,0px));
+  }
+  .credit-strip{
+    background:var(--ink);
+    color:var(--paper);
+    text-align:center;
+    font-size:11.5px;
+    font-family:'IBM Plex Mono',monospace;
+    padding:7px 14px calc(7px + env(safe-area-inset-top,0px)) 14px;
+    letter-spacing:.01em;
+  }
+  .credit-strip a{
+    color:var(--paper);
+    text-decoration:none;
+    border-bottom:1px solid rgba(255,255,255,.35);
+  }
+  .credit-strip .sep{margin:0 8px; opacity:.5;}
+  footer .credit-links a{
+    color:var(--ink-soft);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+  }
+  footer .credit-links{margin-top:6px; display:block;}
+</style>
+</head>
+<body>
+
+<div class="credit-strip">© 2026 Anmar Taha — All rights reserved<span class="sep">·</span>Telegram: <a href="https://t.me/AnmarTaha" target="_blank" rel="noopener">@AnmarTaha</a><span class="sep">·</span>Instagram: <a href="https://instagram.com/a.za18" target="_blank" rel="noopener">a.za18</a></div>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="eyebrow-row">
+      <div class="brandmark">
+        <span class="dot"></span>
+        <span class="source-tag">Third Stage · Pathophysiology · Lecture 1</span>
+      </div>
+      <span class="source-tag">Introduction to Pathophysiology</span>
+    </div>
+    <h1 class="title">Study Smart</h1>
+    <p class="subtitle">A visual guide to Lecture 1 — definitions, disease process, diagnostic reasoning, and epidemiology, built for quick review and self-testing.</p>
+  </div>
+  <nav class="tabs" id="tabs">
+    <button data-panel="overview" aria-selected="true"><span class="num">01</span>Overview</button>
+    <button data-panel="topics" aria-selected="false"><span class="num">02</span>Topics</button>
+    <button data-panel="diagrams" aria-selected="false"><span class="num">03</span>Diagrams</button>
+    <button data-panel="minimap" aria-selected="false"><span class="num">04</span>Mini Map</button>
+    <button data-panel="flashcards" aria-selected="false"><span class="num">05</span>Flashcards</button>
+    <button data-panel="quiz" aria-selected="false"><span class="num">06</span>Quiz Bank</button>
+    <button data-panel="highyield" aria-selected="false"><span class="num">07</span>High Yield</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ================= 1. OVERVIEW ================= -->
+  <section class="panel active" id="panel-overview">
+    <h2 class="panel-title">The lecture in one pass</h2>
+    <p class="panel-lede">Not the full lecture — just the definitions and rules you're actually tested on.</p>
+
+    <div class="overview-grid">
+      <div class="ov-group" style="--tone:var(--teal)">
+        <h3>Core definitions</h3>
+        <ul>
+          <li><b>Pathology</b> — study (logos) of suffering (pathos); structural &amp; functional changes underlying disease.</li>
+          <li><b>Pathophysiology</b> — the physiology of altered health; explains signs/symptoms, not treatment.</li>
+          <li><b>Disease</b> — any condition impairing normal function of an organism.</li>
+        </ul>
+      </div>
+      <div class="ov-group" style="--tone:var(--eosin)">
+        <h3>Pathologist roles</h3>
+        <ul>
+          <li><b>Surgical pathologist</b> — examines specimens from surgery (frozen/paraffin sections).</li>
+          <li><b>Clinical pathologist</b> — lab-based: hematology, bacteriology, chemistry, serology.</li>
+        </ul>
+      </div>
+      <div class="ov-group" style="--tone:var(--amber)">
+        <h3>Two branches of pathology</h3>
+        <ul>
+          <li><b>General pathology</b> — basic cell/tissue reactions common to all disease.</li>
+          <li><b>Systemic pathology</b> — specific organ responses to defined stimuli.</li>
+        </ul>
+      </div>
+      <div class="ov-group" style="--tone:var(--teal)">
+        <h3>6 aspects of the disease process</h3>
+        <ul>
+          <li><b>1.</b> Etiology — the cause</li>
+          <li><b>2.</b> Pathogenesis — how it evolves</li>
+          <li><b>3.</b> Morphologic changes — structure</li>
+          <li><b>4.</b> Clinical manifestations — signs/symptoms</li>
+          <li><b>5.</b> Diagnosis — identification</li>
+          <li><b>6.</b> Clinical course — progression over time</li>
+        </ul>
+      </div>
+      <div class="ov-group" style="--tone:var(--eosin)">
+        <h3>Etiologic agents</h3>
+        <ul>
+          <li><b>Biologic</b> — bacteria, viruses</li>
+          <li><b>Physical</b> — trauma, burns, radiation</li>
+          <li><b>Chemical</b> — poisons, alcohol</li>
+          <li><b>Nutritional</b> — excess or deficit</li>
+          <li>Most disease is <b>multifactorial</b> → risk factors</li>
+        </ul>
+      </div>
+      <div class="ov-group" style="--tone:var(--amber)">
+        <h3>Congenital vs. acquired</h3>
+        <ul>
+          <li><b>Congenital</b> — present at birth (genetic, environmental, or both); may show later.</li>
+          <li><b>Acquired</b> — after birth: injury, infection, poor nutrition, hypoxia, immune response, neoplasia.</li>
+        </ul>
+      </div>
+      <div class="ov-group" style="--tone:var(--teal)">
+        <h3>Signs vs. symptoms</h3>
+        <ul>
+          <li><b>Symptom</b> — subjective (pain, dizziness, dyspnea).</li>
+          <li><b>Sign</b> — objective, observer-noted (fever, swelling, pupil change).</li>
+          <li>Either reflects the <b>primary disorder</b> or the body's <b>compensation</b>.</li>
+        </ul>
+      </div>
+      <div class="ov-group" style="--tone:var(--eosin)">
+        <h3>Syndrome · complication · sequela</h3>
+        <ul>
+          <li><b>Syndrome</b> — a characteristic cluster of signs/symptoms.</li>
+          <li><b>Complication</b> — adverse extension of disease or treatment.</li>
+          <li><b>Sequela</b> — a lesion/impairment left behind by disease.</li>
+        </ul>
+      </div>
+      <div class="ov-group" style="--tone:var(--amber)">
+        <h3>Diagnosis — two meanings</h3>
+        <ul>
+          <li>(1) Recognizing disease by its outward signs/symptoms.</li>
+          <li>(2) Analyzing the underlying physiologic/biochemical cause.</li>
+          <li>Process: <b>history → physical exam → labs/imaging.</b></li>
+        </ul>
+      </div>
+      <div class="ov-group" style="--tone:var(--teal)">
+        <h3>Normal values</h3>
+        <ul>
+          <li>Set statistically from a reference population.</li>
+          <li>Defined as <b>mean ± 2 SD</b> — the 95% distribution.</li>
+          <li><b>Differential diagnosis</b> = the list of "rule-outs."</li>
+        </ul>
+      </div>
+      <div class="ov-group" style="--tone:var(--eosin)">
+        <h3>4 diagnostic modalities</h3>
+        <ul>
+          <li><b>Clinical</b> — from history/exam (e.g. "acute meningitis").</li>
+          <li><b>Morphologic</b> — from the lesion itself.</li>
+          <li><b>Etiologic</b> — names the cause (e.g. "bacterial").</li>
+          <li><b>Disease/Definitive</b> — names the disease itself.</li>
+        </ul>
+      </div>
+      <div class="ov-group" style="--tone:var(--amber)">
+        <h3>Clinical course</h3>
+        <ul>
+          <li><b>Preclinical</b> — too early to diagnose.</li>
+          <li><b>Acute</b> — sudden, usually severe onset.</li>
+          <li><b>Subacute</b> — moderate duration, in between.</li>
+          <li><b>Chronic</b> — persists long-term, may disable.</li>
+          <li><b>Carrier</b> — harbors the organism, no symptoms.</li>
+        </ul>
+      </div>
+      <div class="ov-group" style="--tone:var(--teal)">
+        <h3>Epidemiology</h3>
+        <ul>
+          <li>Study of disease patterns/causes/effects in populations.</li>
+          <li><b>Endemic</b> — maintained in a population, no external input.</li>
+          <li><b>Epidemic</b> — new cases clearly exceed the expected baseline.</li>
+          <li><b>Pandemic</b> — epidemic across continents (e.g. COVID-19).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TOPICS (outline) ================= -->
+  <section class="panel" id="panel-topics">
+    <h2 class="panel-title">Lecture outline</h2>
+    <p class="panel-lede">Main topic and subtopics — titles only, no explanations.</p>
+    <div class="topics-tree">
+      <div class="tp-main">Introduction to Pathophysiology</div>
+      <ol class="tp-list">
+        <li>Pathophysiology
+          <ol class="tp-sub">
+            <li>Pathology</li>
+            <li>Pathologist
+              <ol class="tp-subsub">
+                <li>Surgical Pathologist</li>
+                <li>Clinical Pathologist</li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li>Pathology
+          <ol class="tp-sub">
+            <li>General Pathology</li>
+            <li>Systemic Pathology</li>
+          </ol>
+        </li>
+        <li>The Tree of Medicine</li>
+        <li>Disease
+          <ol class="tp-sub">
+            <li>Etiology
+              <ol class="tp-subsub">
+                <li>Congenital Conditions</li>
+                <li>Acquired Defects</li>
+                <li>Risk Factors</li>
+              </ol>
+            </li>
+            <li>Pathogenesis</li>
+            <li>Morphologic Changes
+              <ol class="tp-subsub">
+                <li>Histology</li>
+                <li>Lesion</li>
+              </ol>
+            </li>
+            <li>Functional Derangements and Clinical Manifestations
+              <ol class="tp-subsub">
+                <li>Symptom</li>
+                <li>Sign</li>
+                <li>Syndrome</li>
+                <li>Complications</li>
+                <li>Sequelae</li>
+              </ol>
+            </li>
+            <li>Diagnosis
+              <ol class="tp-subsub">
+                <li>Differential Diagnosis</li>
+                <li>Clinical Diagnosis</li>
+                <li>Morphologic Diagnosis</li>
+                <li>Etiologic Diagnosis</li>
+                <li>Disease (Definitive) Diagnosis</li>
+              </ol>
+            </li>
+            <li>Clinical Course
+              <ol class="tp-subsub">
+                <li>Preclinical</li>
+                <li>Acute</li>
+                <li>Subacute</li>
+                <li>Chronic</li>
+                <li>Carrier</li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li>Epidemiology and Pattern of Disease
+          <ol class="tp-sub">
+            <li>Endemic Disease</li>
+            <li>Epidemic Disease</li>
+            <li>Pandemic</li>
+          </ol>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= 2. DIAGRAMS ================= -->
+  <section class="panel" id="panel-diagrams">
+    <h2 class="panel-title">Every figure from the lecture, made clickable</h2>
+    <p class="panel-lede">Tap any element to read what it means.</p>
+
+    <!-- Diagram 1: Host-Pathogen-Treatment triad -->
+    <div class="diagram-card">
+      <div class="diagram-head"><h3>ID pathophysiology summary — the Host–Pathogen–Treatment triad</h3><span class="tag">FIG. 1</span></div>
+      <div class="diagram-body">
+        <div class="triad">
+          <div class="node host">HOST</div>
+          <div class="node pathogen">PATHOGEN</div>
+          <div class="node treatment">TREATMENT</div>
+          <button class="q q1" data-cap="cap1" data-key="bug">What is the bug?</button>
+          <button class="q q2" data-cap="cap1" data-key="does">What does it do?</button>
+          <button class="q q3" data-cap="cap1" data-key="go">Where did it go?</button>
+          <button class="q q4" data-cap="cap1" data-key="from">Where did it come from?</button>
+        </div>
+        <div class="caption-box" id="cap1"><span class="placeholder">Tap a question above.</span></div>
+      </div>
+    </div>
+
+    <!-- Diagram 2: Tree of Medicine -->
+    <div class="diagram-card">
+      <div class="diagram-head"><h3>The Tree of Medicine</h3><span class="tag">FIG. 2</span></div>
+      <div class="diagram-body">
+        <div class="tree-band">
+          <span class="band-label">ROOTS — foundational sciences</span>
+          <div class="chips" data-group="roots">
+            <button class="chip" data-key="anatomy">Anatomy</button>
+            <button class="chip" data-key="embryology">Embryology</button>
+            <button class="chip" data-key="histology">Histology</button>
+            <button class="chip" data-key="chemistry">Chemistry</button>
+            <button class="chip" data-key="pharmacology">Pharmacology</button>
+            <button class="chip" data-key="physiology">Physiology</button>
+            <button class="chip" data-key="cellbio">Cell Biology</button>
+            <button class="chip" data-key="immunology">Immunology</button>
+            <button class="chip" data-key="microbiology">Microbiology</button>
+            <button class="chip" data-key="genetics">Genetics</button>
+          </div>
+        </div>
+        <div class="tree-band">
+          <span class="band-label">TRUNK</span>
+          <div class="chips" data-group="trunk">
+            <button class="chip" data-key="generalpath">General Pathology</button>
+          </div>
+        </div>
+        <div class="tree-band">
+          <span class="band-label">CANOPY — systemic pathology &amp; clinical specialties</span>
+          <div class="chips" data-group="canopy">
+            <button class="chip" data-key="derm">Dermatology</button>
+            <button class="chip" data-key="ophth">Ophthalmology</button>
+            <button class="chip" data-key="radiology">Radiology</button>
+            <button class="chip" data-key="dentistry">Dentistry</button>
+            <button class="chip" data-key="gyn">Gynecology</button>
+            <button class="chip" data-key="psych">Psychiatry</button>
+            <button class="chip" data-key="anesth">Anesthesiology</button>
+            <button class="chip" data-key="surgery">Surgery</button>
+            <button class="chip" data-key="peds">Pediatrics</button>
+            <button class="chip" data-key="obs">Obstetrics</button>
+            <button class="chip" data-key="neuro">Neurology</button>
+            <button class="chip" data-key="im">Internal Medicine</button>
+          </div>
+        </div>
+        <div class="caption-box" id="cap2"><span class="placeholder">Tap any science or specialty above.</span></div>
+      </div>
+    </div>
+
+    <!-- Diagram 3: Intrinsic/Extrinsic/Unknown wheel -->
+    <div class="diagram-card">
+      <div class="diagram-head"><h3>Causes of disease — intrinsic, extrinsic &amp; unknown</h3><span class="tag">FIG. 3</span></div>
+      <div class="diagram-body">
+        <div class="wheel-wrap">
+          <div class="wheel-ring" aria-hidden="true"></div>
+          <div class="legend-list">
+            <button class="legend-btn" data-key="intrinsic"><span class="sw" style="background:var(--teal)"></span>Intrinsic causes</button>
+            <button class="legend-btn" data-key="extrinsic"><span class="sw" style="background:var(--eosin)"></span>Extrinsic causes</button>
+            <button class="legend-btn" data-key="unknown"><span class="sw" style="background:var(--amber)"></span>Unknown / idiopathic</button>
+          </div>
+        </div>
+        <div class="caption-box" id="cap3"><span class="placeholder">Tap a category to see its examples.</span></div>
+      </div>
+    </div>
+
+    <!-- Diagram 4: Iceberg concept -->
+    <div class="diagram-card">
+      <div class="diagram-head"><h3>Iceberg concept of disease</h3><span class="tag">FIG. 4</span></div>
+      <div class="diagram-body">
+        <div class="iceberg">
+          <button class="ice-layer ice-1" data-key="death">DEATH</button>
+          <button class="ice-layer ice-2" data-key="severe">SEVERE DISEASE</button>
+          <button class="ice-layer ice-3" data-key="mild">MILD ILLNESS</button>
+          <button class="ice-layer ice-4" data-key="subclinical">INFECTION WITHOUT CLINICAL ILLNESS</button>
+          <button class="ice-layer ice-5" data-key="exposure">EXPOSURE WITHOUT INFECTION</button>
+        </div>
+        <div class="caption-box" id="cap4"><span class="placeholder">Tap a layer, from the tip down.</span></div>
+      </div>
+    </div>
+
+    <!-- Diagram 5: Endemic vs Epidemic -->
+    <div class="diagram-card">
+      <div class="diagram-head"><h3>Endemic vs. epidemic</h3><span class="tag">FIG. 5</span></div>
+      <div class="diagram-body">
+        <div class="epi-toggle">
+          <button class="chip" data-key="endemic-toggle">Show endemic phase</button>
+          <button class="chip" data-key="epidemic-toggle">Show epidemic phase</button>
+        </div>
+        <svg class="epi-chart" viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg">
+          <line x1="30" y1="10" x2="30" y2="190" stroke="#D9E2DD" stroke-width="2"/>
+          <line x1="30" y1="190" x2="620" y2="190" stroke="#D9E2DD" stroke-width="2"/>
+          <text x="8" y="105" font-family="IBM Plex Mono" font-size="10" fill="#8B9C96" transform="rotate(-90 8,105)">CASES</text>
+          <text x="320" y="212" font-family="IBM Plex Mono" font-size="10" fill="#8B9C96" text-anchor="middle">TIME</text>
+          <path id="epiPathBase" d="M40,170 Q80,160 110,168 T180,165 T250,150 T300,158"
+                fill="none" stroke="#D9E2DD" stroke-width="3"/>
+          <path id="epiPathSpike" d="M300,158 C340,140 360,40 400,30 C430,24 460,26 480,40 C520,65 560,150 600,168"
+                fill="none" stroke="#D9E2DD" stroke-width="3"/>
+          <text x="165" y="200" font-family="IBM Plex Sans" font-size="11" fill="#8B9C96" text-anchor="middle" id="epiLabelBase">"Endemic"</text>
+          <text x="450" y="20" font-family="IBM Plex Sans" font-size="11" fill="#8B9C96" text-anchor="middle" id="epiLabelSpike">"Epidemic"</text>
+        </svg>
+        <div class="caption-box" id="cap5"><span class="placeholder">Tap a phase above to highlight it.</span></div>
+      </div>
+    </div>
+
+    <!-- Diagram 6: Diagnosis type table -->
+    <div class="diagram-card">
+      <div class="diagram-head"><h3>Types of diagnosis — worked example</h3><span class="tag">FIG. 6</span></div>
+      <div class="diagram-body">
+        <table class="dx-table" id="dxTable">
+          <thead><tr><th>Type of diagnosis</th><th>Example (10-year-old, neck rigidity &amp; vomiting)</th></tr></thead>
+          <tbody>
+            <tr data-key="clinical"><td class="dtype">Clinical diagnosis</td><td>Acute meningitis</td></tr>
+            <tr data-key="morphologic"><td class="dtype">Morphologic diagnosis</td><td>Inflammation of the pia mater &amp; arachnoid</td></tr>
+            <tr data-key="etiologic"><td class="dtype">Etiologic diagnosis</td><td>Bacterial meningitis</td></tr>
+            <tr data-key="definitive"><td class="dtype">Disease (definitive) diagnosis</td><td>Neisseria meningitis</td></tr>
+          </tbody>
+        </table>
+        <div class="caption-box" id="cap6"><span class="placeholder">Tap a row to see what that diagnosis type actually means.</span></div>
+      </div>
+    </div>
+
+    <!-- Diagram 7: Anemia signs figure -->
+    <div class="diagram-card">
+      <div class="diagram-head"><h3>Signs &amp; symptoms of anemia — by region</h3><span class="tag">FIG. 7</span></div>
+      <div class="diagram-body">
+        <div class="anemia-wrap">
+          <div class="anemia-silhouette" aria-hidden="true"></div>
+          <div class="region-chips">
+            <button class="chip" data-key="central">Central</button>
+            <button class="chip" data-key="eyes">Eyes</button>
+            <button class="chip" data-key="skin">Skin</button>
+            <button class="chip" data-key="vessels">Blood vessels</button>
+            <button class="chip" data-key="heart">Heart</button>
+            <button class="chip" data-key="resp">Respiratory</button>
+            <button class="chip" data-key="muscular">Muscular</button>
+            <button class="chip" data-key="intestinal">Intestinal</button>
+            <button class="chip" data-key="spleen">Spleen</button>
+          </div>
+        </div>
+        <div class="caption-box" id="cap7"><span class="placeholder">Tap a body region. Items in red mark severe anemia.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3. MINI MAP ================= -->
+  <section class="panel" id="panel-minimap">
+    <h2 class="panel-title">Mini map</h2>
+    <p class="panel-lede">Tap a topic on the left — the full explanation opens here, on the right.</p>
+    <div class="minimap">
+      <div class="mm-list" id="mmList"></div>
+      <div class="mm-detail" id="mmDetail">
+        <span class="placeholder">Select a topic to read it in full.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4. FLASHCARDS ================= -->
+  <section class="panel" id="panel-flashcards">
+    <h2 class="panel-title">Flashcards</h2>
+    <p class="panel-lede">Tap a card to flip it. Pick a difficulty level, then filter by topic if you like.</p>
+    <div class="fc-toolbar" id="fcLevels"></div>
+    <div class="fc-toolbar" id="fcFilters"></div>
+    <div class="fc-count" id="fcCount"></div>
+    <div class="fc-grid" id="fcGrid"></div>
+  </section>
+
+  <!-- ================= 5. QUIZ BANK ================= -->
+  <section class="panel" id="panel-quiz">
+    <h2 class="panel-title">Quiz Bank</h2>
+    <p class="panel-lede">Pick a difficulty level. Answer choices are re-shuffled every time you load or switch level.</p>
+    <div class="fc-toolbar" id="quizLevels"></div>
+    <div class="quiz-top">
+      <span class="quiz-progress" id="quizProgress">Question 1 / 1</span>
+      <span class="quiz-score" id="quizScore">Score: 0 / 0</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="quiz-card" id="quizCard">
+      <p class="quiz-q" id="quizQ"></p>
+      <div class="quiz-options" id="quizOptions"></div>
+      <div class="quiz-foot">
+        <span class="quiz-feedback" id="quizFeedback"></span>
+        <div style="display:flex; gap:8px;">
+          <button class="quiz-btn ghost" id="quizPrev">Previous</button>
+          <button class="quiz-btn" id="quizNext" disabled>Next</button>
+        </div>
+      </div>
+    </div>
+    <div class="quiz-jump" id="quizJump"></div>
+  </section>
+
+  <!-- ================= 6. HIGH YIELD ================= -->
+  <section class="panel" id="panel-highyield">
+    <h2 class="panel-title">High Yield</h2>
+    <p class="panel-lede">The facts, comparisons, and worked examples most likely to show up on an exam — distilled to one screen each.</p>
+    <div class="hy-grid">
+      <div class="hy-card">
+        <div class="hy-top"><span class="hy-tag">Numbers</span><span class="hy-star">★</span></div>
+        <h4>The "normal" reference range</h4>
+        <p>Statistically defined as <b>mean ± 2 SD</b> — the <b>95%</b> distribution of results from a reference population, not an absolute cutoff.</p>
+      </div>
+      <div class="hy-card tone-teal">
+        <div class="hy-top"><span class="hy-tag">Sequence</span><span class="hy-star">★★</span></div>
+        <h4>The 6 aspects of the disease process</h4>
+        <p><b>Etiology → Pathogenesis → Morphologic changes → Clinical manifestations → Diagnosis → Clinical course.</b> A favorite "put these in order" question.</p>
+      </div>
+      <div class="hy-card tone-amber">
+        <div class="hy-top"><span class="hy-tag">Worked example</span><span class="hy-star">★★★</span></div>
+        <h4>4 diagnostic modalities — meningitis case</h4>
+        <p><b>Clinical</b> (acute meningitis) → <b>Morphologic</b> (inflamed pia/arachnoid) → <b>Etiologic</b> (bacterial) → <b>Disease/definitive</b> (Neisseria meningitis). Classic exam vignette.</p>
+      </div>
+      <div class="hy-card">
+        <div class="hy-top"><span class="hy-tag">Classic pair</span><span class="hy-star">★★★</span></div>
+        <h4>Sign vs. symptom</h4>
+        <p><b>Symptom</b> = subjective, patient-reported (pain, dizziness). <b>Sign</b> = objective, observer-noted (fever, swelling). The single most commonly confused pair.</p>
+      </div>
+      <div class="hy-card tone-teal">
+        <div class="hy-top"><span class="hy-tag">Classic pair</span><span class="hy-star">★★</span></div>
+        <h4>Congenital vs. acquired</h4>
+        <p><b>Congenital</b> = present at birth (genetic and/or environmental), may show later. <b>Acquired</b> = arises after birth (injury, infection, nutrition, hypoxia, immune, neoplasia).</p>
+      </div>
+      <div class="hy-card tone-amber">
+        <div class="hy-top"><span class="hy-tag">Classic pair</span><span class="hy-star">★★★</span></div>
+        <h4>Etiology vs. pathogenesis</h4>
+        <p><b>Etiology</b> = what starts it. <b>Pathogenesis</b> = how it evolves. Atherosclerosis is the pathogenesis of coronary heart disease — its true etiology is still uncertain.</p>
+      </div>
+      <div class="hy-card">
+        <div class="hy-top"><span class="hy-tag">Classic pair</span><span class="hy-star">★★</span></div>
+        <h4>Complication vs. sequela</h4>
+        <p><b>Complication</b> = adverse extension of disease or its treatment. <b>Sequela</b> = a lasting lesion/impairment left behind by the disease itself.</p>
+      </div>
+      <div class="hy-card tone-teal">
+        <div class="hy-top"><span class="hy-tag">Scale</span><span class="hy-star">★★★</span></div>
+        <h4>Endemic → epidemic → pandemic</h4>
+        <p><b>Endemic</b> = steady baseline, no outside input. <b>Epidemic</b> = new cases clearly exceed that baseline. <b>Pandemic</b> = epidemic across continents (COVID-19, H1N1).</p>
+      </div>
+      <div class="hy-card tone-amber">
+        <div class="hy-top"><span class="hy-tag">Sequence</span><span class="hy-star">★★</span></div>
+        <h4>Clinical course stages</h4>
+        <p><b>Preclinical</b> (too early to diagnose) → <b>Acute</b> (sudden, severe) → <b>Subacute</b> (moderate, patient looks well) → <b>Chronic</b> (long-term, may progress/disable).</p>
+      </div>
+      <div class="hy-card">
+        <div class="hy-top"><span class="hy-tag">Definition</span><span class="hy-star">★★</span></div>
+        <h4>Carrier</h4>
+        <p>Harbors the disease organism with <b>no symptoms</b>, yet can still act as a distributor of infection to others.</p>
+      </div>
+      <div class="hy-card tone-teal">
+        <div class="hy-top"><span class="hy-tag">Sequence</span><span class="hy-star">★★★</span></div>
+        <h4>Iceberg concept — bottom to top</h4>
+        <p><b>Exposure without infection → infection without illness → mild illness → severe disease → death.</b> Most of a population's disease sits in the hidden bottom layers.</p>
+      </div>
+      <div class="hy-card tone-amber">
+        <div class="hy-top"><span class="hy-tag">Classification</span><span class="hy-star">★★</span></div>
+        <h4>Intrinsic vs. extrinsic vs. unknown</h4>
+        <p><b>Intrinsic</b> = from within (inherited, congenital, metabolic, psychogenic). <b>Extrinsic</b> = from outside (physical, chemical, iatrogenic, infectious). <b>Unknown</b> = idiopathic.</p>
+      </div>
+      <div class="hy-card">
+        <div class="hy-top"><span class="hy-tag">Classic pair</span><span class="hy-star">★</span></div>
+        <h4>General vs. systemic pathology</h4>
+        <p><b>General</b> = basic reactions shared by all disease. <b>Systemic</b> = specific responses of individual organs to defined stimuli.</p>
+      </div>
+      <div class="hy-card tone-teal">
+        <div class="hy-top"><span class="hy-tag">Classic pair</span><span class="hy-star">★</span></div>
+        <h4>Surgical vs. clinical pathologist</h4>
+        <p><b>Surgical</b> = studies tissue from surgery, often intra-operatively. <b>Clinical</b> = lab-based — hematology, bacteriology, chemistry, serology.</p>
+      </div>
+      <div class="hy-card tone-amber">
+        <div class="hy-top"><span class="hy-tag">Definition</span><span class="hy-star">★★</span></div>
+        <h4>Diagnosis — two definitions</h4>
+        <p>(1) Recognizing disease by its <b>outward signs/symptoms</b>. (2) Analyzing its underlying <b>physiological/biochemical cause</b>. Examiners like to test both.</p>
+      </div>
+      <div class="hy-card">
+        <div class="hy-top"><span class="hy-tag">Definition</span><span class="hy-star">★</span></div>
+        <h4>Differential diagnosis</h4>
+        <p>The list of possible diagnoses ("rule-outs") that could explain a case's history, signs, or lesions — not the final answer itself.</p>
+      </div>
+      <div class="hy-card tone-teal">
+        <div class="hy-top"><span class="hy-tag">Definition + example</span><span class="hy-star">★</span></div>
+        <h4>Syndrome</h4>
+        <p>A compilation of characteristic signs and symptoms — e.g. <b>chronic fatigue syndrome</b> — without necessarily naming one single causative disease.</p>
+      </div>
+      <div class="hy-card tone-amber">
+        <div class="hy-top"><span class="hy-tag">Principle</span><span class="hy-star">★★</span></div>
+        <h4>Most disease is multifactorial</h4>
+        <p>Cancer, heart disease, and diabetes rarely have one single cause — they arise from several combined <b>risk factors</b> instead.</p>
+      </div>
+      <div class="hy-card">
+        <div class="hy-top"><span class="hy-tag">Principle</span><span class="hy-star">★★</span></div>
+        <h4>Etiologic agents are mostly nonspecific</h4>
+        <p>One agent can damage several organs, and several different agents can damage the same organ — which is exactly why differential diagnosis exists.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Anmar Taha. All rights reserved. · Study Smart — a self-study companion for Pathophysiology, Lecture 1.
+  <span class="credit-links">Telegram: <a href="https://t.me/AnmarTaha" target="_blank" rel="noopener">@AnmarTaha</a> · Instagram: <a href="https://instagram.com/a.za18" target="_blank" rel="noopener">a.za18</a></span>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------- Tabs ---------------- */
+  var tabButtons = document.querySelectorAll('#tabs button');
+  tabButtons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      tabButtons.forEach(function(b){ b.setAttribute('aria-selected','false'); });
+      btn.setAttribute('aria-selected','true');
+      document.querySelectorAll('section.panel').forEach(function(p){ p.classList.remove('active'); });
+      document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+
+  /* ---------------- Diagram captions ---------------- */
+  function setCap(id, title, body){
+    var el = document.getElementById(id);
+    el.innerHTML = '<span class="cap-title">' + title + '</span>' + body;
+  }
+
+  // Fig 1: triad
+  var triadData = {
+    bug: ["What is the bug?", "Identify the pathogen: bacteria, virus, fungus, parasite — the biologic etiologic agent."],
+    does: ["What does it do?", "The pathogenesis: how the organism damages the host, from initial stimulus to disease expression."],
+    from: ["Where did it come from?", "The source/reservoir of the pathogen — part of establishing its etiology."],
+    go: ["Where did it go?", "Tracks the organism's spread through the host and guides how treatment is targeted."]
+  };
+  document.querySelectorAll('.triad .q').forEach(function(b){
+    b.addEventListener('click', function(){ var d = triadData[b.dataset.key]; setCap('cap1', d[0], d[1]); });
+  });
+
+  // Fig 2: tree
+  var treeData = {
+    anatomy:"Structure of the body — the physical basis pathology builds on.",
+    embryology:"Development from fertilization onward — explains many congenital conditions.",
+    histology:"Study of tissues at the microscopic level — the core tool of morphologic diagnosis.",
+    chemistry:"The molecular basis for biochemical changes seen in disease.",
+    pharmacology:"How drugs act on the body — links directly to treatment and iatrogenic disease.",
+    physiology:"Normal function — pathophysiology is quite literally its disturbed counterpart.",
+    cellbio:"Cell-level structure and function — where most disease processes actually begin.",
+    immunology:"The host defense system — central to infectious and immune-mediated disease.",
+    microbiology:"The study of pathogens themselves — bacteria, viruses, fungi, parasites.",
+    genetics:"Inherited material — the basis of congenital and hereditary disease.",
+    generalpath:"The trunk of the tree: basic reactions (inflammation, injury, repair, neoplasia) common to every disease, everywhere in the body.",
+    derm:"Skin disease — built on general pathology's inflammation &amp; repair concepts.",
+    ophth:"Eye disease — a systemic-pathology specialty.",
+    radiology:"Imaging-based diagnosis — supports morphologic diagnosis without a biopsy.",
+    dentistry:"Oral &amp; dental disease.",
+    gyn:"Female reproductive system disease.",
+    psych:"Disorders of mental function.",
+    anesth:"Manages the physiologic stress of surgery and pain control.",
+    surgery:"Treats disease through operative intervention; works closely with surgical pathologists.",
+    peds:"Disease as it presents specifically in children, including congenital conditions.",
+    obs:"Pregnancy and childbirth — where congenital disease often first becomes relevant.",
+    neuro:"Disease of the nervous system.",
+    im:"Adult disease across all internal organ systems — heavily systemic-pathology based."
+  };
+  document.querySelectorAll('.tree-band .chip').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.tree-band .chip').forEach(function(c){ c.classList.remove('active'); });
+      b.classList.add('active');
+      setCap('cap2', b.textContent, treeData[b.dataset.key]);
+    });
+  });
+
+  // Fig 3: wheel
+  var wheelData = {
+    intrinsic: ["Intrinsic causes", "Arise from within the person: inherited, congenital, metabolic, degenerative, neoplastic, immunologic, nutritional-deficiency, and psychogenic factors."],
+    extrinsic: ["Extrinsic causes", "Arise from outside the person: physical agents (temperature, humidity, radiation, electricity, chemicals, iatrogenic causes) and infectious agents (bacteria, viruses, fungi, protozoa, worms, insects)."],
+    unknown: ["Unknown / idiopathic", "The cause simply hasn't been identified yet — marked with a question mark in the original figure."]
+  };
+  document.querySelectorAll('.legend-btn').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.legend-btn').forEach(function(c){ c.classList.remove('active'); });
+      b.classList.add('active');
+      var d = wheelData[b.dataset.key];
+      setCap('cap3', d[0], d[1]);
+    });
+  });
+
+  // Fig 4: iceberg
+  var iceData = {
+    death: ["Death", "The tip of the iceberg — the rarest, most visible outcome of clinical disease."],
+    severe: ["Severe disease", "Clinical disease that is serious enough to be obvious and usually urgent."],
+    mild: ["Mild illness", "Still clinical disease, but not severe — often under-reported."],
+    subclinical: ["Infection without clinical illness", "Subclinical disease: the person is infected but shows no outward illness."],
+    exposure: ["Exposure without infection", "The base of the iceberg — contact with a pathogen that never actually establishes infection. Most of the iceberg is hidden below the surface, just like most disease in a population."]
+  };
+  document.querySelectorAll('.ice-layer').forEach(function(b){
+    b.addEventListener('click', function(){ var d = iceData[b.dataset.key]; setCap('cap4', d[0], d[1]); });
+  });
+
+  // Fig 5: endemic/epidemic
+  var basePath = document.getElementById('epiPathBase');
+  var spikePath = document.getElementById('epiPathSpike');
+  document.querySelectorAll('.epi-toggle .chip').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.epi-toggle .chip').forEach(function(c){ c.classList.remove('active'); });
+      b.classList.add('active');
+      if(b.dataset.key === 'endemic-toggle'){
+        basePath.setAttribute('stroke', '#1E6E76'); spikePath.setAttribute('stroke', '#D9E2DD');
+        setCap('cap5', 'Endemic pattern', 'A disease is endemic when it is maintained steadily in a population without needing new cases introduced from outside — the low, wavy baseline on the left of the chart.');
+      } else {
+        basePath.setAttribute('stroke', '#D9E2DD'); spikePath.setAttribute('stroke', '#BD5678');
+        setCap('cap5', 'Epidemic pattern', 'An epidemic occurs when new cases clearly exceed what recent experience would predict — the sharp rise and peak on the right of the chart. Spread across continents becomes a pandemic (e.g. COVID-19, H1N1).');
+      }
+    });
+  });
+
+  // Fig 6: diagnosis table
+  var dxData = {
+    clinical: ["Clinical diagnosis", "Based only on the case history, clinical signs, and physical examination — before any lab or lesion data is added."],
+    morphologic: ["Morphologic (lesion) diagnosis", "Based on the predominant lesion itself, gross or microscopic — describing its severity, duration, distribution, location and nature."],
+    etiologic: ["Etiologic diagnosis", "A definitive diagnosis that names the specific (or general) cause — e.g. 'bacterial' rather than 'viral'."],
+    definitive: ["Disease (definitive) diagnosis", "The most specific diagnosis possible — it states the actual name of the disease, here down to the organism, Neisseria meningitidis."]
+  };
+  document.querySelectorAll('#dxTable tbody tr').forEach(function(tr){
+    tr.addEventListener('click', function(){
+      document.querySelectorAll('#dxTable tbody tr').forEach(function(t){ t.classList.remove('active'); });
+      tr.classList.add('active');
+      var d = dxData[tr.dataset.key];
+      setCap('cap6', d[0], d[1]);
+    });
+  });
+
+  // Fig 7: anemia
+  var anemiaData = {
+    central: ["Central", "Fatigue, dizziness, and — in severe anemia — <b style='color:var(--bad)'>fainting</b>."],
+    eyes: ["Eyes", "Yellowing (jaundice) of the sclera."],
+    skin: ["Skin", "Paleness, coldness, and yellowing."],
+    vessels: ["Blood vessels", "Low blood pressure."],
+    heart: ["Heart", "Palpitations, rapid heart rate, and — in severe anemia — <b style='color:var(--bad)'>chest pain, angina, and heart attack</b>."],
+    resp: ["Respiratory", "Shortness of breath."],
+    muscular: ["Muscular", "General weakness."],
+    intestinal: ["Intestinal", "Changed stool color."],
+    spleen: ["Spleen", "Enlargement (splenomegaly)."]
+  };
+  document.querySelectorAll('.region-chips .chip').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.region-chips .chip').forEach(function(c){ c.classList.remove('active'); });
+      b.classList.add('active');
+      var d = anemiaData[b.dataset.key];
+      setCap('cap7', d[0], d[1]);
+    });
+  });
+
+  /* ---------------- Mini map ---------------- */
+  var mmTopics = [
+    { title:"Etiology", body:"<p>The <b>causes</b> of disease. Recognized etiologic agents fall into four groups: biologic (bacteria, viruses), physical (trauma, burns, radiation), chemical (poisons, alcohol), and nutritional excesses or deficits.</p><p>Most disease-causing agents are non-specific — a single agent can affect several organs, and several agents can affect the same organ. The majority of diseases are therefore <b>multifactorial</b>, with contributing risk factors rather than one single cause.</p><ul><li>Congenital — present at birth, genetic and/or environmental in origin</li><li>Acquired — arising after birth from injury, infection, poor nutrition, hypoxia, immune response, or neoplasia</li></ul>" },
+    { title:"Pathogenesis", body:"<p>The <b>sequence of events</b> in how cells or tissues respond to the etiologic agent, from the first stimulus to the full expression of disease.</p><p>Etiology and pathogenesis are often used interchangeably but mean different things: etiology is <i>what</i> starts the disease process, pathogenesis is <i>how</i> it evolves. For example, atherosclerosis is the pathogenesis of coronary heart disease — the progression from fatty streak to occlusive lesion — while the true etiology of atherosclerosis itself remains largely uncertain.</p>" },
+    { title:"Morphologic changes", body:"<p><b>Morphology</b> is the fundamental structure or form of cells or tissues. Morphologic changes cover both gross anatomic changes and microscopic changes characteristic of a disease.</p><p><b>Histology</b> studies cells and extracellular matrix via thin, translucent tissue sections examined under a microscope — central to diagnosing many cancers.</p><p>A <b>lesion</b> is a pathologic or traumatic discontinuity of an organ or tissue. Lesions can be described via imaging (radiographs, ultrasound) or sampled by <b>biopsy</b> for histologic study.</p>" },
+    { title:"Clinical manifestations — signs &amp; symptoms", body:"<p>The nature and distribution of morphologic changes determine a disease's <b>symptoms</b>, <b>signs</b>, course, and prognosis.</p><ul><li><b>Symptom</b> — a subjective complaint noted by the patient (pain, dizziness, difficulty breathing).</li><li><b>Sign</b> — an objective finding noted by an observer (fever, swollen extremity, pupil change).</li></ul><p>Signs and symptoms are either directly related to the primary disorder, or represent the body's attempt to <b>compensate</b> — e.g. tachycardia after blood loss, or a raised respiratory rate with pneumonia.</p><p>A <b>syndrome</b> is a compilation of characteristic signs and symptoms (e.g. chronic fatigue syndrome). A <b>complication</b> is a possible adverse extension of disease or its treatment. A <b>sequela</b> is a lesion or impairment that follows or is caused by a disease.</p>" },
+    { title:"Diagnosis", body:"<p>Diagnosis has two dictionary definitions: (1) the recognition of a disease by its outward signs and symptoms, and (2) the analysis of the underlying physiological/biochemical cause of a disease.</p><p>The diagnostic process usually needs: a careful <b>history</b>, a <b>physical examination</b>, and <b>laboratory/imaging tests</b>. A key part of interpreting lab results is knowing whether a value is normal — 'normal' is defined statistically as the 95% distribution (<b>mean ± 2 SD</b>) of a reference population.</p><p>A <b>differential diagnosis</b> is the list of possible diagnoses ('rule-outs') that could explain a case's findings.</p><h3 style='font-size:14px; margin-top:16px;'>The four diagnostic modalities</h3><ul><li><b>Clinical diagnosis</b> — from history, signs, and exam alone.</li><li><b>Morphologic diagnosis</b> — from the predominant lesion.</li><li><b>Etiologic diagnosis</b> — names the specific cause.</li><li><b>Disease (definitive) diagnosis</b> — states the actual disease name.</li></ul>" },
+    { title:"Clinical course", body:"<p>Describes how a disease evolves over time. Every disease can be:</p><ul><li><b>Preclinical</b> — signs/symptoms haven't developed enough for a specific diagnosis.</li><li><b>Acute</b> — sudden onset, usually severe; resolves into recovery, chronicity, or death.</li><li><b>Subacute</b> — between acute and chronic in duration and severity; the person may appear clinically well.</li><li><b>Chronic</b> — persists over a long period, may be less severe than the acute phase but can progress, disable, or prove fatal (e.g. diabetes mellitus, emphysema, arthritis).</li></ul><p>A <b>carrier</b> harbors a disease organism without showing symptoms, and can still spread infection to others.</p>" },
+    { title:"Epidemiology &amp; disease patterns", body:"<p><b>Epidemiology</b> is the study of the patterns, causes, and effects of health and disease in defined populations — the cornerstone of public health, informing prevention and evidence-based medicine by identifying risk factors.</p><ul><li><b>Endemic</b> — a disease maintained in a population without needing outside input.</li><li><b>Epidemic</b> — new cases substantially exceed what recent experience predicted.</li><li><b>Pandemic</b> — an epidemic that has spread across multiple continents or worldwide (e.g. H1N1 influenza, COVID-19).</li></ul><p>The <b>iceberg concept of disease</b> shows that only a small fraction of a population's disease burden — severe illness and death — is ever clinically visible; underneath lie mild illness, infection without illness, and exposure without infection.</p>" },
+    { title:"Pathologist roles &amp; pathology's two branches", body:"<p>A <b>pathologist</b> evaluates and supervises diagnostic tests, acting as a laboratory consultant and investigator of disease. There are two main roles:</p><ul><li><b>Surgical pathologist</b> — studies disease from tissue removed during surgery, often examining specimens intra-operatively via frozen or paraffin sections.</li><li><b>Clinical pathologist</b> — the laboratory study of disease across hematology, bacteriology, chemistry, and serology.</li></ul><p>Pathology itself splits into two branches:</p><ul><li><b>General pathology</b> — the basic cell/tissue reactions underlying all disease (inflammation, injury, repair, hemodynamic disorders, immunity, neoplasia, genetic and infectious disease).</li><li><b>Systemic pathology</b> — the specific responses of individual organs and tissues to defined stimuli.</li></ul>" }
+  ];
+  var mmList = document.getElementById('mmList');
+  var mmDetail = document.getElementById('mmDetail');
+  mmTopics.forEach(function(t, i){
+    var btn = document.createElement('button');
+    btn.className = 'mm-item';
+    btn.innerHTML = '<span>' + t.title + '</span><span class="mm-ico">' + String(i+1).padStart(2,'0') + '</span>';
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.mm-item').forEach(function(m){ m.classList.remove('active'); });
+      btn.classList.add('active');
+      mmDetail.innerHTML = '<h3>' + t.title + '</h3>' + t.body;
+    });
+    mmList.appendChild(btn);
+  });
+
+  /* ---------------- Flashcards ---------------- */
+  var flashcardLevels = {
+    easy: [
+      {cat:"Definitions", term:"Pathology", def:"The study (logos) of suffering (pathos) — structural and functional changes in cells, tissues, and organs that underlie disease."},
+      {cat:"Definitions", term:"Pathophysiology", def:"The physiology of altered health. Explains the processes that produce a disease's signs and symptoms — it does not deal with treatment directly."},
+      {cat:"Definitions", term:"Disease", def:"Any condition that impairs the normal functioning of an organism or body."},
+      {cat:"Roles", term:"Surgical pathologist", def:"Studies disease via tissue specimens from surgery, often examined intra-operatively with frozen or paraffin sections."},
+      {cat:"Roles", term:"Clinical pathologist", def:"Studies disease in the lab, across hematology, bacteriology, chemistry, and serology."},
+      {cat:"Roles", term:"Pathologist (general role)", def:"A physician specialist who evaluates and supervises diagnostic tests, functions as a laboratory consultant to clinicians, and investigates the causes of disease."},
+      {cat:"Definitions", term:"General pathology", def:"The basic reactions of cells and tissues to abnormal stimuli that underlie all disease — inflammation, cell injury, repair, hemodynamic disorders, immunity, neoplasia, and more."},
+      {cat:"Definitions", term:"Systemic pathology", def:"The study of specific responses of specialized organs and tissues to more or less well-defined stimuli."},
+      {cat:"Etiology", term:"Etiology", def:"The cause(s) of disease. Describes what sets the disease process in motion."},
+      {cat:"Etiology", term:"Biologic etiologic agents", def:"Bacteria and viruses."},
+      {cat:"Etiology", term:"Physical etiologic agents", def:"Trauma, burns, radiation."},
+      {cat:"Etiology", term:"Chemical etiologic agents", def:"Poisons, alcohol."},
+      {cat:"Etiology", term:"Nutritional etiologic agents", def:"Nutritional excesses or deficits."},
+      {cat:"Etiology", term:"Risk factor", def:"One of multiple factors that predispose a person to a particular (usually multifactorial) disease, e.g. cancer, heart disease, diabetes."},
+      {cat:"Etiology", term:"Multifactorial disease", def:"A disease without a single cause — most diseases fall in this category, arising from several contributing factors."},
+      {cat:"Etiology", term:"Congenital condition", def:"A defect present at birth, though it may not become evident until later in life; caused by genetic factors, environmental factors, or both."},
+      {cat:"Etiology", term:"Acquired defect", def:"A defect caused by events after birth — injury, infectious agents, inadequate nutrition, lack of oxygen, inappropriate immune responses, or neoplasia."},
+      {cat:"Etiology", term:"Idiopathic", def:"A disease whose cause is unknown."},
+      {cat:"Etiology", term:"Iatrogenic", def:"A condition caused by medical treatment itself (a physical-agent-induced, extrinsic cause of disease)."},
+      {cat:"Pathogenesis", term:"Pathogenesis", def:"The sequence of events in the response of cells or tissues to the etiologic agent — from the initial stimulus to the ultimate expression of disease. Describes how the disease evolves."},
+      {cat:"Pathogenesis", term:"Etiology vs. pathogenesis", def:"Etiology is what starts a disease; pathogenesis is how it evolves. Example: atherosclerosis is the pathogenesis of coronary heart disease, while its true etiology remains largely uncertain."},
+      {cat:"Morphology", term:"Morphology", def:"The fundamental structure or form of cells or tissues."},
+      {cat:"Morphology", term:"Morphologic changes", def:"Both the gross anatomic and microscopic changes characteristic of a disease."},
+      {cat:"Morphology", term:"Histology", def:"The study of the cells and extracellular matrix of body tissues, typically via thin, translucent histologic sections viewed under a microscope."},
+      {cat:"Morphology", term:"Lesion", def:"A pathologic or traumatic discontinuity of a body organ or tissue."},
+      {cat:"Morphology", term:"Biopsy", def:"Sampling of a lesion's tissue for histologic study."},
+      {cat:"Signs & symptoms", term:"Symptom", def:"A subjective complaint noted by the person with a disorder (e.g. pain, dizziness, difficulty breathing)."},
+      {cat:"Signs & symptoms", term:"Sign", def:"An objective manifestation noted by an observer (e.g. fever, swelling, pupil size change)."},
+      {cat:"Signs & symptoms", term:"Compensatory sign", def:"A sign that reflects the body's attempt to compensate for altered function — e.g. tachycardia after blood loss, increased respiratory rate with pneumonia."},
+      {cat:"Signs & symptoms", term:"Syndrome", def:"A compilation of signs and symptoms characteristic of a specific disease state, e.g. chronic fatigue syndrome."},
+      {cat:"Signs & symptoms", term:"Complication", def:"A possible adverse extension of a disease or an outcome of its treatment."},
+      {cat:"Signs & symptoms", term:"Sequela", def:"A lesion or impairment that follows or is caused by a disease."},
+      {cat:"Diagnosis", term:"Diagnosis (definition 1)", def:"The recognition of a disease or condition by its outward signs and symptoms."},
+      {cat:"Diagnosis", term:"Diagnosis (definition 2)", def:"The analysis of the underlying physiological/biochemical cause(s) of a disease or condition."},
+      {cat:"Diagnosis", term:"History (in diagnosis)", def:"Obtaining a person's account of their symptoms, their progression, and any contributing factors."},
+      {cat:"Diagnosis", term:"Physical examination", def:"Done to observe for signs of altered body structure or function."},
+      {cat:"Diagnosis", term:"Diagnostic process order", def:"History-taking, then physical examination, then laboratory/imaging tests, in that order, to reach a diagnosis."},
+      {cat:"Diagnosis", term:"Normal value (lab test)", def:"Established statistically as the 95% distribution — mean ± 2 standard deviations — of results from a reference population."},
+      {cat:"Diagnosis", term:"Differential diagnosis", def:"A list of diagnoses ('rule-outs') that could account for the history, signs, or lesions found in a case."},
+      {cat:"Diagnosis", term:"Clinical diagnosis", def:"Diagnosis based on case history, clinical signs, and physical examination alone — e.g. 'acute meningitis.'"},
+      {cat:"Diagnosis", term:"Morphologic diagnosis", def:"Diagnosis based on the predominant lesion(s), macroscopic or microscopic — e.g. 'inflammation of the pia mater and arachnoid.'"},
+      {cat:"Diagnosis", term:"Etiologic diagnosis", def:"A definitive diagnosis naming the specific or general cause of disease — e.g. 'bacterial meningitis.'"},
+      {cat:"Diagnosis", term:"Disease (definitive) diagnosis", def:"A specific diagnosis that states the actual name of the disease — e.g. 'Neisseria meningitis.'"},
+      {cat:"Clinical course", term:"Preclinical stage", def:"A stage when a specific diagnosis cannot yet be made because adequate signs and symptoms haven't developed."},
+      {cat:"Clinical course", term:"Acute disease", def:"Relatively sudden onset of usually severe symptoms; resolves into recovery, chronic phase, or death."},
+      {cat:"Clinical course", term:"Subacute disease", def:"Between acute and chronic; moderate duration or severity, often in a person who appears clinically well."},
+      {cat:"Clinical course", term:"Chronic disease", def:"Persists over a long period; may be progressive, disabling, or fatal — e.g. diabetes mellitus, emphysema, arthritis."},
+      {cat:"Clinical course", term:"Carrier", def:"A person who harbors a disease organism without manifest symptoms, and can still act as a distributor of infection."},
+      {cat:"Epidemiology", term:"Epidemiology", def:"The study of the patterns, causes, and effects of health and disease conditions in defined populations — the cornerstone of public health."},
+      {cat:"Epidemiology", term:"Endemic disease", def:"A disease maintained in a population without the need for external inputs."},
+      {cat:"Epidemiology", term:"Epidemic disease", def:"New cases of a disease, in a given population and period, substantially exceed what recent experience would predict."},
+      {cat:"Epidemiology", term:"Pandemic", def:"An epidemic that has spread through human populations across a large region — multiple continents or worldwide, e.g. H1N1 influenza, COVID-19."},
+      {cat:"Epidemiology", term:"Iceberg concept of disease", def:"Most disease in a population is hidden 'below the surface' as exposure or subclinical infection; only severe disease and death are clearly visible above it."},
+      {cat:"Etiology", term:"Intrinsic causes of disease", def:"Inherited, congenital, metabolic, degenerative, neoplastic, immunologic, nutritional-deficiency, and psychogenic factors."},
+      {cat:"Etiology", term:"Extrinsic causes of disease", def:"Physical agents (temperature, radiation, chemicals, iatrogenic) and infectious agents (bacteria, viruses, fungi, protozoa, worms, insects)."},
+      {cat:"Definitions", term:"Tree of Medicine (concept)", def:"Foundational sciences (anatomy, physiology, microbiology, genetics, etc.) form the roots; general pathology is the trunk; systemic pathology and every clinical specialty form the canopy."},
+      {cat:"Definitions", term:"Host–Pathogen–Treatment triad", def:"A framework asking: what is the bug, what does it do, where did it come from, and where did it go — linking pathogen, host, and treatment."},
+      {cat:"Signs & symptoms", term:"Anemia — sign example", def:"Pallor and tachycardia are objective signs of anemia, observable by someone other than the patient."},
+      {cat:"Signs & symptoms", term:"Anemia — symptom example", def:"Fatigue and dizziness are subjective symptoms of anemia, reported by the patient."},
+      {cat:"Pathogenesis", term:"Coronary heart disease example", def:"Atherosclerosis — progression from fatty streak to occlusive vessel lesion — illustrates pathogenesis; the disease's true etiology remains largely uncertain."}
+    ],
+    medium: [
+      {cat:"Definitions", term:"Pathology vs. pathophysiology", def:"Pathology studies the structural/functional changes underlying disease broadly; pathophysiology zeroes in on how those changes produce signs and symptoms, without addressing treatment."},
+      {cat:"Roles", term:"Surgical vs. clinical pathologist", def:"Surgical pathologists study tissue specimens, often intra-operatively; clinical pathologists work in the lab across hematology, bacteriology, chemistry, and serology."},
+      {cat:"Definitions", term:"General vs. systemic pathology", def:"General pathology covers basic reactions shared by every disease; systemic pathology covers the specific responses of individual organs to defined stimuli."},
+      {cat:"Etiology", term:"Congenital vs. acquired — differentiate", def:"Congenital defects are present at birth (genetic and/or environmental origin, may show later); acquired defects arise after birth from injury, infection, poor nutrition, hypoxia, immune response, or neoplasia."},
+      {cat:"Pathogenesis", term:"Etiology vs. pathogenesis — why they're not interchangeable", def:"Etiology is what starts a disease; pathogenesis is how it unfolds. Treating them as synonyms hides that a disease's evolution can be well mapped even when its true cause is not."},
+      {cat:"Signs & symptoms", term:"Sign vs. symptom — anemia example", def:"Pallor is a sign (objective, observer-noted); fatigue is a symptom (subjective, patient-reported) — both can occur in the same disease."},
+      {cat:"Signs & symptoms", term:"Complication vs. sequela — differentiate", def:"A complication is an adverse extension of the disease or its treatment; a sequela is a lasting lesion or impairment left behind after the disease."},
+      {cat:"Diagnosis", term:"Clinical vs. morphologic diagnosis — meningitis example", def:"Clinical diagnosis ('acute meningitis') comes from history/exam alone; morphologic diagnosis ('inflammation of the pia mater and arachnoid') comes from the lesion itself."},
+      {cat:"Diagnosis", term:"Etiologic vs. definitive diagnosis — differentiate", def:"Etiologic diagnosis names the general cause ('bacterial meningitis'); definitive diagnosis names the exact disease/organism ('Neisseria meningitis')."},
+      {cat:"Clinical course", term:"Acute vs. subacute vs. chronic — compare", def:"Acute = sudden, usually severe, resolves to recovery/chronicity/death; subacute = moderate duration between acute and chronic, patient often appears well; chronic = persists long-term, may progress or disable."},
+      {cat:"Epidemiology", term:"Endemic vs. epidemic — compare", def:"Endemic = steady baseline maintained without outside input; epidemic = new cases substantially exceed that expected baseline."},
+      {cat:"Epidemiology", term:"Epidemic vs. pandemic — compare", def:"An epidemic becomes a pandemic once it spreads across multiple continents or worldwide, e.g. COVID-19."},
+      {cat:"Etiology", term:"Intrinsic vs. extrinsic causes — compare", def:"Intrinsic causes originate within the person (inherited, congenital, metabolic, psychogenic); extrinsic causes originate outside the person (physical, chemical, iatrogenic, infectious)."},
+      {cat:"Clinical course", term:"Preclinical stage vs. subclinical infection", def:"Preclinical = too early in a clinical-course sense for a specific diagnosis; subclinical infection (Iceberg Concept) = infected but never becomes clinically apparent — two related but distinct ideas."},
+      {cat:"Diagnosis", term:"Why 'normal' is statistical, not absolute", def:"Normal lab values are the 95% distribution (mean ± 2 SD) of a reference population, so by definition some healthy people fall outside that range."},
+      {cat:"Etiology", term:"Why one agent can affect many organs, and many agents one organ", def:"Most disease-causing agents are nonspecific — they aren't restricted to a single organ, and a given organ can be damaged by several different agents."},
+      {cat:"Pathogenesis", term:"Why atherosclerosis's etiology is still uncertain", def:"Its pathogenesis (fatty streak → occlusive lesion) is well described, but the true underlying cause of atherosclerosis itself remains largely unknown."},
+      {cat:"Epidemiology", term:"Iceberg Concept and surveillance", def:"Because most cases sit in the hidden lower layers (exposure, subclinical infection), clinical surveillance based on visible illness underestimates the true burden of disease."},
+      {cat:"Clinical course", term:"Why a carrier matters epidemiologically", def:"A carrier has no symptoms but can still transmit the organism to others, making them an important, hidden source of spread."},
+      {cat:"Etiology", term:"Risk factor vs. etiologic agent", def:"A risk factor predisposes to a multifactorial disease without being sufficient on its own; an etiologic agent is a more direct, named cause."},
+      {cat:"Etiology", term:"Classifying radiation exposure", def:"As an etiologic agent, radiation is a physical agent; under the intrinsic/extrinsic model, it is an extrinsic cause."},
+      {cat:"Etiology", term:"Classifying an inherited disorder", def:"By timing it is congenital; under the intrinsic/extrinsic model it is intrinsic (inherited/metabolic)."},
+      {cat:"Etiology", term:"Classifying iatrogenic disease", def:"By etiologic category it is typically a physical or chemical agent; under the intrinsic/extrinsic model it is extrinsic, since it originates from treatment applied to the patient."},
+      {cat:"Diagnosis", term:"The two definitions of 'diagnosis'", def:"(1) Recognizing a disease from its outward signs/symptoms, and (2) analyzing the underlying physiological/biochemical cause — related but distinct clinical tasks."},
+      {cat:"Diagnosis", term:"Why history comes before lab tests", def:"History and physical exam build the clinical picture and differential diagnosis that lab/imaging tests then confirm or narrow — not the reverse."},
+      {cat:"Diagnosis", term:"Why differential diagnosis matters before a definitive one", def:"A differential diagnosis lists the possible conditions that fit the findings so far, which testing then narrows down to a single definitive diagnosis."},
+      {cat:"Diagnosis", term:"The four diagnostic modalities, in order of increasing specificity", def:"Clinical → morphologic → etiologic → disease (definitive) diagnosis, as illustrated by the meningitis case moving from 'acute meningitis' to 'Neisseria meningitis.'"},
+      {cat:"Definitions", term:"Roots-to-trunk relationship in the Tree of Medicine", def:"Foundational sciences (roots) provide the basis that general pathology (trunk) is built upon."},
+      {cat:"Definitions", term:"Trunk-to-canopy relationship in the Tree of Medicine", def:"General pathology (trunk) underlies systemic pathology and every clinical specialty (canopy) built above it."},
+      {cat:"Definitions", term:"'Where did it come from?' vs. 'where did it go?'", def:"The first addresses the pathogen's origin (etiology/prevention); the second tracks its spread through the host (relevant to targeting treatment)."},
+      {cat:"Signs & symptoms", term:"Symptom vs. compensatory response — pneumonia example", def:"Difficulty breathing may be a direct symptom of lung disease, while an increased respiratory rate can also represent the body compensating for altered function."},
+      {cat:"Etiology", term:"Why most agents are 'nonspecific'", def:"Because a single agent can damage several organs and several agents can damage the same organ, most disease-causing agents don't map neatly to one organ."},
+      {cat:"Etiology", term:"Genetic predisposition + environmental trigger", def:"Many diseases result from an inherited predisposition that only becomes disease once an environmental event or exposure acts as the trigger."},
+      {cat:"Morphology", term:"Biopsy vs. imaging for lesion assessment", def:"Imaging (radiographs, CT, ultrasound) describes a lesion's size/location; biopsy samples the tissue itself for histologic study, revealing finer structural detail."},
+      {cat:"Morphology", term:"Why histology is central to cancer diagnosis", def:"Microscopic structural changes are often what actually distinguishes malignant from benign tissue, beyond what gross findings alone can show."},
+      {cat:"Epidemiology", term:"Exposure without infection vs. infection without illness", def:"In the first Iceberg layer, the pathogen never establishes infection; in the second, infection occurs but produces no visible illness."},
+      {cat:"Epidemiology", term:"Why most of the Iceberg is invisible to clinicians", def:"Exposure and subclinical infection make up the largest layers, yet produce no clinical signs that would bring a person to medical attention."},
+      {cat:"Etiology", term:"Idiopathic vs. unknown extrinsic cause", def:"Idiopathic means no cause has been identified at all; an unclassified extrinsic cause would still be known to originate outside the body, just not yet specified."},
+      {cat:"Clinical course", term:"Clinical significance of 'subacute'", def:"Labeling a stage subacute signals moderate duration/severity between acute and chronic — often while the patient still appears clinically well, which can delay diagnosis."},
+      {cat:"Clinical course", term:"Why chronic disease isn't automatically 'milder'", def:"Chronic disease may be less symptomatically severe than the acute phase, yet still be progressive and lead to disability or death over time."},
+      {cat:"Epidemiology", term:"Endemic baseline vs. epidemic spike — on a graph", def:"An endemic pattern is a low, steady case count over time; an epidemic is a sharp, sustained rise clearly above that established baseline."},
+      {cat:"Epidemiology", term:"Why COVID-19 is a pandemic, not just an epidemic", def:"Because it spread across multiple continents/worldwide, meeting the geographic-scale criterion that distinguishes a pandemic from a localized epidemic."},
+      {cat:"Signs & symptoms", term:"Syndrome vs. definitive disease diagnosis", def:"A syndrome is a characteristic cluster of signs/symptoms (e.g. chronic fatigue syndrome) without necessarily naming a single causative disease; a definitive diagnosis names the exact disease."},
+      {cat:"Signs & symptoms", term:"Sequela vs. complication — timing", def:"A sequela is a lasting impairment that follows the disease itself; a complication is an adverse extension arising from the disease or its treatment."},
+      {cat:"Signs & symptoms", term:"Severe vs. general signs of anemia", def:"Fainting, chest pain, angina, and heart attack mark severe anemia; paleness, fatigue, and mild tachycardia can occur even in non-severe anemia."},
+      {cat:"Morphology", term:"Gross vs. microscopic morphologic change", def:"Gross change is visible to the eye at the organ/tissue level; microscopic change requires histologic sections viewed under a microscope — both together define a morphologic diagnosis."},
+      {cat:"Diagnosis", term:"Why a 95% reference range still misclassifies some healthy people", def:"Because 'normal' is defined as mean ± 2 SD covering 95% of a reference population, roughly 5% of healthy individuals will still fall outside that range."},
+      {cat:"Roles", term:"Clinical pathologist's tools vs. surgical pathologist's tools", def:"Clinical pathologists rely on lab techniques (hematology, chemistry, serology); surgical pathologists rely on tissue examination via frozen/paraffin sections."},
+      {cat:"Etiology", term:"Multifactorial disease and etiologic diagnosis", def:"When a disease like diabetes arises from many contributing risk factors rather than one agent, stating a single 'etiologic diagnosis' becomes difficult or impossible."},
+      {cat:"Definitions", term:"Why pathophysiology 'doesn't deal directly with treatment'", def:"It explains the disease processes that generate signs and symptoms; that explanation informs treatment decisions but is conceptually distinct from treatment itself."}
+    ],
+    hard: [
+      {cat:"Diagnosis", term:"Meningitis case — clinical diagnosis stage", def:"With only history, signs, and exam documented ('acute meningitis'), just the clinical diagnosis has been reached — morphologic, etiologic, and definitive diagnosis still remain."},
+      {cat:"Diagnosis", term:"Meningitis case — morphologic diagnosis stage", def:"Once necropsy shows inflammation of the pia mater and arachnoid without a named organism, a morphologic diagnosis has been added on top of the clinical one."},
+      {cat:"Diagnosis", term:"Meningitis case — etiologic diagnosis stage", def:"Once culture confirms a bacterial (but unspeciated) cause, the diagnosis 'bacterial meningitis' represents the etiologic diagnosis stage."},
+      {cat:"Diagnosis", term:"Meningitis case — definitive diagnosis stage", def:"Once the organism is speciated as Neisseria meningitidis, the disease (definitive) diagnosis has been reached — the most specific of the four modalities."},
+      {cat:"Pathogenesis", term:"Decoupling pathogenesis from etiology (CHD example)", def:"A disease's pathogenesis (fatty streak → occlusive lesion) can be extensively characterized even while its true etiology remains 'largely uncertain' — the two aspects of the disease process are logically independent."},
+      {cat:"Epidemiology", term:"Endemic baseline with an epidemic spike, not a new baseline", def:"A sharp rise well above a disease's historical endemic level, followed by a decline back down, represents an epidemic superimposed on the endemic pattern — not a permanently raised endemic level."},
+      {cat:"Epidemiology", term:"Where an unrecognized subclinical infection sits, and why it matters", def:"An infected-but-asymptomatic, untested person occupies the 'infection without clinical illness' Iceberg layer and is invisible to clinical-case-based surveillance, understating true disease burden."},
+      {cat:"Clinical course", term:"What 'progressive' chronic disease implies", def:"A progressive chronic disease is consistent with gradual worsening over time, potentially resulting in disability — distinct from a single self-limited episode."},
+      {cat:"Etiology", term:"Congenital defect with combined genetic + environmental cause", def:"A defect present at birth caused jointly by a genetic mutation and maternal drug exposure is still classified as congenital — congenital describes timing, not a single-cause etiology."},
+      {cat:"Etiology", term:"Why one traumatic event can damage multiple organs", def:"Because most disease-causing agents are nonspecific, a major physical insult (e.g., a severe burn) is not restricted to affecting a single organ system."},
+      {cat:"Signs & symptoms", term:"Interpreting tachycardia after blood loss", def:"Best read as a compensatory sign reflecting the body's response to blood loss, not necessarily the primary lesion itself — misreading it as primary could misdirect treatment."},
+      {cat:"Diagnosis", term:"An 'abnormal' lab value in an asymptomatic patient", def:"A value outside mean ± 2 SD is statistically atypical, but because the reference range only covers 95% of a healthy population, the patient may still be physiologically healthy."},
+      {cat:"Diagnosis", term:"Why differential diagnosis is needed even after a clinical diagnosis", def:"A clinical diagnosis from history/exam alone can still fit several possible underlying conditions, which a differential diagnosis is meant to narrow down before further testing."},
+      {cat:"Etiology", term:"Etiologic diagnosis in multifactorial disease", def:"For diseases like diabetes, an 'etiologic diagnosis' is typically framed as a set of contributing risk factors rather than one single definitive cause."},
+      {cat:"Signs & symptoms", term:"Complication vs. sequela — precise distinction restated", def:"A complication is an adverse extension of disease or its treatment; a sequela is specifically a lasting impairment caused by the disease itself — these are not interchangeable."},
+      {cat:"Clinical course", term:"Why chronic disease isn't inherently 'less dangerous'", def:"Even when less symptomatically severe than an acute phase, chronic disease can still be progressive and lead to disability or death over time."},
+      {cat:"Clinical course", term:"Carrier + Iceberg Concept combined", def:"An asymptomatic person shedding an infectious organism simultaneously fits the definition of 'carrier' and occupies the lower, hidden layers of the Iceberg Concept."},
+      {cat:"Morphology", term:"Why histology matters more in cancer than many other conditions", def:"Microscopic morphologic changes are often what specifically distinguishes malignant from benign tissue — detail that gross examination alone frequently cannot provide."},
+      {cat:"Etiology", term:"Genetic predisposition triggered by an extrinsic exposure", def:"Many diseases arise when an intrinsic (inherited) predisposition is triggered into clinical expression by an extrinsic environmental exposure — the two categories often combine rather than acting alone."},
+      {cat:"Epidemiology", term:"Why epidemic status is relative, not absolute", def:"Epidemic status depends on case counts substantially exceeding what recent experience would predict for that specific population and period — not a fixed case-count threshold."},
+      {cat:"Etiology", term:"Idiopathic disease that is otherwise well characterized", def:"A disease can be idiopathic (unknown etiology) while its pathogenesis, morphologic changes, and clinical course are all still thoroughly documented."},
+      {cat:"Diagnosis", term:"'Where did it come from?' vs. 'where did it go?' — non-redundancy", def:"One question targets the pathogen's origin (etiology and prevention); the other tracks its spread through the host (guiding how treatment is targeted) — distinct clinical purposes."},
+      {cat:"Morphology", term:"Why biopsy can add what imaging cannot", def:"Biopsy enables histologic study that can reveal morphologic — and sometimes etiologic — detail beyond what imaging studies like radiographs or CT typically show."},
+      {cat:"Etiology", term:"Nonspecificity of etiologic agents and differential diagnosis", def:"Because most agents are nonspecific, the same clinical picture can be produced by several different causes, which is precisely why a differential diagnosis list is necessary."},
+      {cat:"Diagnosis", term:"Why history/exam precede lab testing, logically", def:"History and physical exam generate the clinical picture and differential diagnosis that lab and imaging tests are then used to confirm or narrow — not the reverse order."},
+      {cat:"Signs & symptoms", term:"Compensatory signs and the limits of direct observation", def:"Many pathologic states (a sick heart, a failing kidney) can't be observed directly — what's often seen clinically is the body's compensatory response to the underlying lesion, not the lesion itself."},
+      {cat:"Definitions", term:"Why general pathology is the 'trunk,' not a 'root'", def:"General pathology is built on the foundational sciences (roots) yet forms the shared foundation every specialty (canopy) is built upon — distinct from the basic sciences themselves."},
+      {cat:"Signs & symptoms", term:"Organ-specific sign clusters in one disease (anemia)", def:"The same underlying disease can present with very different predominant signs (cardiac vs. respiratory vs. intestinal) depending on which organ system is most affected — reflecting how morphologic distribution shapes clinical manifestations."},
+      {cat:"Diagnosis", term:"Differential diagnosis vs. etiologic diagnosis — logical relationship", def:"Listing possible diagnoses (differential) does not by itself resolve which one is correct — reaching an etiologic diagnosis requires further narrowing via testing."},
+      {cat:"Etiology", term:"Congenital defect with multifactorial etiology — no contradiction", def:"A defect described as 'combined genetic and environmental' in origin is still congenital, because congenital describes timing (present at birth), not the number or type of causes."},
+      {cat:"Definitions", term:"Why pathophysiology remains essential despite not addressing treatment", def:"By explaining the processes producing signs and symptoms, it provides the sound foundation on which rational, targeted clinical therapy is then built."},
+      {cat:"Morphology", term:"Full morphologic diagnosis needs five features together", def:"Severity, duration, distribution, location, and nature together — not any single feature alone — constitute a complete morphologic diagnosis of a lesion."},
+      {cat:"Epidemiology", term:"Why three distinct endemic baseline outcomes are possible", def:"After endemic case counts rise, the pattern can subside back to baseline (a resolved epidemic), persist at a new higher level, or continue climbing — the graph alone doesn't predict which."},
+      {cat:"Clinical course", term:"Three possible outcomes of the acute stage", def:"An acute episode can end in recovery to prior health, passage into a chronic phase, or death — acute onset alone does not predict which outcome will occur."},
+      {cat:"Etiology", term:"Why iatrogenic causes sit under 'extrinsic'", def:"Iatrogenic disease typically results from a physical or chemical intervention (a drug or procedure) applied from outside the patient's own body, fitting the extrinsic category despite originating in treatment."},
+      {cat:"Epidemiology", term:"Why epidemiology is 'the cornerstone of public health'", def:"By identifying risk factors and disease patterns across populations, it directly informs prevention strategies and evidence-based medicine, beyond individual patient care."},
+      {cat:"Diagnosis", term:"Independent clinical value of etiologic vs. definitive diagnosis", def:"An etiologic diagnosis (e.g. 'viral') can guide broad treatment sooner; a definitive diagnosis (the exact organism) enables the most targeted management — both carry distinct clinical value."},
+      {cat:"Diagnosis", term:"Why 'diagnosis' has two distinct dictionary definitions", def:"Recognizing disease from outward signs, and separately analyzing its underlying physiological/biochemical cause, are two related but genuinely distinct clinical tasks — not restatements of each other."},
+      {cat:"Definitions", term:"How the six aspects of the disease process interrelate", def:"Etiology sets the process in motion; pathogenesis describes its evolution; morphologic changes and clinical manifestations reflect its structural/functional expression; diagnosis and clinical course describe how it's recognized and how it unfolds — each aspect builds on the others."},
+      {cat:"Epidemiology", term:"Epidemic definition doesn't require a brand-new disease", def:"A disease already endemic in a population can still become epidemic if new cases substantially exceed recent expected experience — epidemic and endemic status are not mutually exclusive over time."}
+    ]
+  };
+
+  var fcGrid = document.getElementById('fcGrid');
+  var fcFilters = document.getElementById('fcFilters');
+  var fcLevels = document.getElementById('fcLevels');
+  var fcCount = document.getElementById('fcCount');
+  var activeCat = "All";
+  var activeFcLevel = "easy";
+  var fcLevelMeta = {easy:"Level 1 — Easy", medium:"Level 2 — Medium", hard:"Level 3 — Hard"};
+
+  Object.keys(fcLevelMeta).forEach(function(lvl){
+    var b = document.createElement('button');
+    b.className = 'fc-filter' + (lvl==='easy' ? ' active' : '');
+    b.textContent = fcLevelMeta[lvl];
+    b.addEventListener('click', function(){
+      activeFcLevel = lvl;
+      activeCat = "All";
+      fcLevels.querySelectorAll('.fc-filter').forEach(function(f){ f.classList.remove('active'); });
+      b.classList.add('active');
+      buildCategoryFilters();
+      renderFlashcards();
+    });
+    fcLevels.appendChild(b);
+  });
+
+  function buildCategoryFilters(){
+    fcFilters.innerHTML = '';
+    var cats = ["All"].concat(Array.from(new Set(flashcardLevels[activeFcLevel].map(function(f){return f.cat;}))));
+    cats.forEach(function(c){
+      var b = document.createElement('button');
+      b.className = 'fc-filter' + (c==='All' ? ' active' : '');
+      b.textContent = c;
+      b.addEventListener('click', function(){
+        activeCat = c;
+        fcFilters.querySelectorAll('.fc-filter').forEach(function(f){ f.classList.remove('active'); });
+        b.classList.add('active');
+        renderFlashcards();
+      });
+      fcFilters.appendChild(b);
+    });
+  }
+
+  function renderFlashcards(){
+    fcGrid.innerHTML = '';
+    var pool = flashcardLevels[activeFcLevel];
+    var list = activeCat === 'All' ? pool : pool.filter(function(f){ return f.cat === activeCat; });
+    fcCount.textContent = list.length + ' cards · ' + fcLevelMeta[activeFcLevel];
+    list.forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'fc-card';
+      card.innerHTML =
+        '<div class="fc-inner">' +
+          '<div class="fc-face fc-front"><span class="fc-tab">' + f.cat + '</span><span class="fc-term">' + f.term + '</span><span class="fc-flip-hint">tap to flip</span></div>' +
+          '<div class="fc-face fc-back"><span class="fc-tab">Definition</span><span class="fc-def">' + f.def + '</span><span class="fc-flip-hint">tap to flip back</span></div>' +
+        '</div>';
+      card.addEventListener('click', function(){ card.classList.toggle('flipped'); });
+      fcGrid.appendChild(card);
+    });
+  }
+  buildCategoryFilters();
+  renderFlashcards();
+
+  /* ---------------- Quiz ---------------- */
+  var quizLevels = {
+    easy: [
+      {q:"What does pathophysiology explain?", c:"The processes that produce a disease's signs and symptoms", w:["The treatment protocol for a disease","The financial cost of a disease","The genetic code of the patient"]},
+      {q:"Pathology is literally the study of what?", c:"Suffering (pathos)", w:["Cure (therapeia)","Growth (auxesis)","Balance (isonomia)"]},
+      {q:"Which pathologist typically examines specimens intra-operatively?", c:"Surgical pathologist", w:["Clinical pathologist","Forensic pathologist","Radiologist"]},
+      {q:"Hematology, bacteriology, chemistry, and serology are branches of which role?", c:"Clinical pathologist", w:["Surgical pathologist","Epidemiologist","Anesthesiologist"]},
+      {q:"General pathology studies:", c:"Basic cell/tissue reactions common to all disease", w:["Only cancers of the blood","Disease in a single named organ only","The financial burden of illness"]},
+      {q:"Systemic pathology studies:", c:"Specific responses of specialized organs and tissues to defined stimuli", w:["Only infectious diseases","Only diseases of the immune system","Basic reactions common to every disease"]},
+      {q:"Which of these is NOT one of the 6 aspects of the disease process?", c:"Insurance coverage", w:["Etiology","Pathogenesis","Clinical course"]},
+      {q:"'Etiology' refers to:", c:"The causes of disease", w:["The sequence of events as disease evolves","The gross and microscopic structural changes","The list of possible diagnoses"]},
+      {q:"'Pathogenesis' refers to:", c:"The sequence of events from initial stimulus to full disease expression", w:["The causes of disease","The statistical range of normal lab values","A cluster of characteristic signs and symptoms"]},
+      {q:"Trauma, burns, and radiation are examples of which etiologic agent category?", c:"Physical agents", w:["Biologic agents","Chemical agents","Nutritional factors"]},
+      {q:"Bacteria and viruses are examples of which etiologic agent category?", c:"Biologic agents", w:["Physical agents","Chemical agents","Congenital factors"]},
+      {q:"Poisons and alcohol are examples of which etiologic agent category?", c:"Chemical agents", w:["Biologic agents","Physical agents","Idiopathic agents"]},
+      {q:"Most diseases such as cancer, heart disease, and diabetes are best described as:", c:"Multifactorial in origin", w:["Caused by a single agent only","Always congenital","Always idiopathic"]},
+      {q:"A defect present at birth, even if not evident until later, is called:", c:"Congenital", w:["Acquired","Iatrogenic","Idiopathic"]},
+      {q:"A defect caused by events occurring after birth is called:", c:"Acquired", w:["Congenital","Hereditary","Innate"]},
+      {q:"In the example given, atherosclerosis is best described as the ___ of coronary heart disease.", c:"Pathogenesis", w:["Etiology","Diagnosis","Sequela"]},
+      {q:"Etiology and pathogenesis differ in that:", c:"Etiology is what starts a disease; pathogenesis is how it evolves", w:["They mean exactly the same thing in every context","Etiology only applies to congenital disease","Pathogenesis only applies to infections"]},
+      {q:"Morphology refers to:", c:"The fundamental structure or form of cells or tissues", w:["The cause of a disease","The subjective complaints of a patient","The statistical definition of a normal lab value"]},
+      {q:"Histology is best described as:", c:"The study of cells and extracellular matrix of body tissues", w:["The study of disease patterns across populations","The study of drug interactions","The study of family history"]},
+      {q:"A pathologic or traumatic discontinuity of a body organ or tissue is called a:", c:"Lesion", w:["Syndrome","Sequela","Carrier state"]},
+      {q:"A subjective complaint noted by the patient is called a:", c:"Symptom", w:["Sign","Syndrome","Sequela"]},
+      {q:"An objective finding noted by an observer is called a:", c:"Sign", w:["Symptom","Complication","Diagnosis"]},
+      {q:"Pain and dizziness are examples of:", c:"Symptoms", w:["Signs","Sequelae","Syndromes"]},
+      {q:"An elevated temperature and a swollen extremity are examples of:", c:"Signs", w:["Symptoms","Complications","Risk factors"]},
+      {q:"Tachycardia after blood loss is best understood as:", c:"A compensatory sign for altered function", w:["An unrelated coincidental finding","A congenital defect","A diagnostic test result"]},
+      {q:"A compilation of signs and symptoms characteristic of a specific disease state is called a:", c:"Syndrome", w:["Sequela","Complication","Lesion"]},
+      {q:"A possible adverse extension of a disease or its treatment is called a:", c:"Complication", w:["Syndrome","Sequela","Pathogenesis"]},
+      {q:"A lesion or impairment that follows or is caused by a disease is called a:", c:"Sequela", w:["Syndrome","Complication","Symptom"]},
+      {q:"The first dictionary definition of 'diagnosis' is:", c:"The recognition of a disease by its outward signs and symptoms", w:["The prescribing of treatment","The prevention of future disease","The statistical average of test results"]},
+      {q:"The second dictionary definition of 'diagnosis' is:", c:"The analysis of the underlying physiological/biochemical cause of a disease", w:["The recognition of disease by outward signs alone","A list of possible rule-out diagnoses","The naming of a syndrome"]},
+      {q:"The diagnostic process usually requires history, physical examination, and:", c:"Laboratory/imaging tests", w:["A signed consent form only","A referral letter only","A public health report"]},
+      {q:"A 'normal' lab value is statistically defined as:", c:"Mean ± 2 standard deviations (the 95% distribution)", w:["Exactly the average value with no variation","Whatever value the patient reports as normal","The lowest value recorded in any study"]},
+      {q:"A list of diagnoses that could account for the findings in a case is called the:", c:"Differential diagnosis", w:["Definitive diagnosis", "Clinical course","Syndrome list"]},
+      {q:"'Acute meningitis,' based only on history and exam, is an example of a:", c:"Clinical diagnosis", w:["Morphologic diagnosis","Etiologic diagnosis","Disease (definitive) diagnosis"]},
+      {q:"'Inflammation of the pia mater and arachnoid' is an example of a:", c:"Morphologic diagnosis", w:["Clinical diagnosis","Etiologic diagnosis","Disease (definitive) diagnosis"]},
+      {q:"'Bacterial meningitis' is an example of a:", c:"Etiologic diagnosis", w:["Clinical diagnosis","Morphologic diagnosis","Preclinical diagnosis"]},
+      {q:"'Neisseria meningitis' is an example of a:", c:"Disease (definitive) diagnosis", w:["Clinical diagnosis","Morphologic diagnosis","Differential diagnosis"]},
+      {q:"A stage when a specific diagnosis cannot yet be made is called:", c:"Preclinical", w:["Acute","Subacute","Chronic"]},
+      {q:"A disease stage with sudden, usually severe onset of symptoms is called:", c:"Acute", w:["Preclinical","Subacute","Chronic"]},
+      {q:"A disease of moderate duration or severity, between acute and chronic, is called:", c:"Subacute", w:["Preclinical","Acute","Chronic"]},
+      {q:"Diabetes mellitus, emphysema, and arthritis are examples of:", c:"Chronic disease", w:["Acute disease","Subacute disease","Preclinical disease"]},
+      {q:"A person who harbors a disease organism without symptoms and can spread it is called a:", c:"Carrier", w:["Vector","Reservoir host","Index case"]},
+      {q:"Epidemiology is best defined as:", c:"The study of patterns, causes, and effects of health and disease in populations", w:["The treatment of infectious disease in individuals","The surgical management of tumors","The genetic mapping of inherited disease"]},
+      {q:"A disease maintained in a population without external input is:", c:"Endemic", w:["Epidemic","Pandemic","Idiopathic"]},
+      {q:"New cases of disease that substantially exceed the expected baseline describe a(n):", c:"Epidemic", w:["Endemic pattern","Preclinical state","Sequela"]},
+      {q:"An epidemic spread across multiple continents or worldwide is called a:", c:"Pandemic", w:["Endemic","Syndrome","Complication"]},
+      {q:"COVID-19 and H1N1 influenza are given as examples of:", c:"Pandemics", w:["Endemic diseases only","Congenital diseases","Chronic diseases only"]},
+      {q:"In the Iceberg Concept of Disease, which sits at the very base (largest layer)?", c:"Exposure without infection", w:["Death","Severe disease","Mild illness"]},
+      {q:"In the Iceberg Concept of Disease, which sits at the very tip?", c:"Death", w:["Exposure without infection","Infection without clinical illness","Mild illness"]},
+      {q:"Inherited, congenital, metabolic, and psychogenic factors are grouped as:", c:"Intrinsic causes of disease", w:["Extrinsic causes of disease","Unknown causes of disease","Iatrogenic causes only"]},
+      {q:"Infectious agents and iatrogenic causes are grouped as:", c:"Extrinsic causes of disease", w:["Intrinsic causes of disease","Idiopathic causes only","Congenital causes only"]},
+      {q:"A condition caused by medical treatment itself is described as:", c:"Iatrogenic", w:["Idiopathic","Congenital","Endemic"]},
+      {q:"In the Tree of Medicine, which sits at the very roots?", c:"Foundational sciences like anatomy and physiology", w:["Clinical specialties like surgery and pediatrics","Systemic pathology","Signs and symptoms"]},
+      {q:"In the Tree of Medicine, the trunk represents:", c:"General pathology", w:["Systemic pathology","Internal medicine","Epidemiology"]},
+      {q:"Which question does the Host–Pathogen–Treatment framework NOT typically ask?", c:"What is the treatment cost?", w:["What is the bug?","What does it do?","Where did it come from?"]},
+      {q:"Fatigue and dizziness in a person with anemia are considered:", c:"Symptoms (subjective)", w:["Signs (objective)","Syndromes","Sequelae"]},
+      {q:"Pallor and a rapid heart rate in a person with anemia are considered:", c:"Signs (objective)", w:["Symptoms (subjective)","Complications","Risk factors"]},
+      {q:"What is a lesion?", c:"A pathologic or traumatic discontinuity of a body organ or tissue", w:["A statistical measure of lab values","A synonym for diagnosis","A type of treatment plan"]},
+      {q:"What is a biopsy used for?", c:"Sampling tissue from a lesion for histologic study", w:["Measuring blood pressure","Recording patient history only","Classifying a disease as endemic or epidemic"]},
+      {q:"A person with no symptoms who can still spread infection to others is a:", c:"Carrier", w:["Syndrome","Sequela","Complication"]}
+    ],
+    medium: [
+      {q:"A disease is maintained in a population without new cases being introduced from outside. This is best classified as:", c:"Endemic", w:["Epidemic","Pandemic","Idiopathic"]},
+      {q:"Case counts for a disease suddenly and substantially exceed the recent baseline in one region. This is best classified as:", c:"Epidemic", w:["Endemic","Sporadic","Preclinical"]},
+      {q:"An epidemic that has spread across multiple continents is reclassified as a:", c:"Pandemic", w:["Endemic disease","Syndrome","Complication"]},
+      {q:"A patient's disease has a clearly described pathogenesis but an etiology that remains uncertain. This scenario best illustrates that:", c:"Pathogenesis and etiology can be studied independently of each other", w:["Etiology always determines pathogenesis exactly","A disease without a known etiology cannot be studied further","Pathogenesis is simply another word for etiology"]},
+      {q:"A structural finding is documented only by its severity, distribution, and location, with no cause stated. This best fits a:", c:"Morphologic diagnosis", w:["Etiologic diagnosis","Clinical diagnosis","Disease (definitive) diagnosis"]},
+      {q:"A diagnosis is reached using only the patient's history and physical exam findings, before any lab or lesion data are available. This is a:", c:"Clinical diagnosis", w:["Morphologic diagnosis","Etiologic diagnosis","Disease (definitive) diagnosis"]},
+      {q:"'Bacterial meningitis' names the general cause of disease but not the exact organism. This is an example of a(n):", c:"Etiologic diagnosis", w:["Clinical diagnosis","Morphologic diagnosis","Disease (definitive) diagnosis"]},
+      {q:"'Neisseria meningitis' names the exact disease-causing organism. This is an example of a(n):", c:"Disease (definitive) diagnosis", w:["Clinical diagnosis","Morphologic diagnosis","Differential diagnosis"]},
+      {q:"Tachycardia occurring after blood loss is best understood as:", c:"A compensatory sign, not necessarily the primary disorder itself", w:["A symptom reported by the patient","An unrelated coincidental finding","A congenital defect"]},
+      {q:"A patient reports pain, while an examiner independently documents a swollen joint. Which pairing correctly labels these findings?", c:"Pain = symptom; swollen joint = sign", w:["Pain = sign; swollen joint = symptom","Both are signs","Both are symptoms"]},
+      {q:"A genetic mutation combines with an intrauterine viral infection to produce a defect evident at birth. This defect is best classified as:", c:"Congenital, with combined genetic and environmental etiology", w:["Acquired, purely environmental","Idiopathic, cause unknown","Iatrogenic, treatment-caused"]},
+      {q:"A disease develops after birth due to inadequate nutrition. This is best classified as:", c:"Acquired", w:["Congenital","Idiopathic","Hereditary"]},
+      {q:"Radiation exposure causing tissue damage would be classified under etiology as a ___ agent, and under the intrinsic/extrinsic model as ___.", c:"Physical; extrinsic", w:["Chemical; intrinsic","Biologic; intrinsic","Nutritional; extrinsic"]},
+      {q:"A condition arising as a direct result of a medical treatment itself is classified as:", c:"Iatrogenic", w:["Idiopathic","Congenital","Endemic"]},
+      {q:"Why can a single etiologic agent sometimes cause disease in several different organs?", c:"Most disease-causing agents are nonspecific", w:["All etiologic agents are organ-specific by definition","Etiologic agents never affect more than one organ","Only chemical agents can affect multiple organs"]},
+      {q:"Why do most diseases lack a single identifiable cause?", c:"Most diseases are multifactorial, arising from several risk factors together", w:["Etiologic agents are always unknown","All disease is idiopathic by definition","Diagnosis always precedes etiology"]},
+      {q:"What best distinguishes a 'differential diagnosis' from a 'definitive diagnosis'?", c:"A differential diagnosis is a list of possibilities; a definitive diagnosis names the actual disease", w:["They are interchangeable terms","A differential diagnosis is always etiologic","A definitive diagnosis never requires lab testing"]},
+      {q:"A lab test result falls outside the typical mean ± 2 SD range for the reference population. This means the result is:", c:"Statistically abnormal, though the patient may still be healthy", w:["Automatically diagnostic of disease","Always a laboratory error","Impossible for a healthy person to have"]},
+      {q:"Which best explains why histologic sections are especially important in cancer diagnosis?", c:"They reveal microscopic structural changes central to identifying malignancy", w:["They replace the need for a clinical history","They are only used for infectious disease","They directly measure disease etiology, not morphology"]},
+      {q:"A fever resolves completely with no lasting effect. According to the lecture's definition, this outcome represents:", c:"Recovery to a state comparable to health before the disease", w:["A sequela","A chronic phase","A complication"]},
+      {q:"A disease resolves acutely but leaves permanent scarring. The scarring is best termed a:", c:"Sequela", w:["Complication","Syndrome","Risk factor"]},
+      {q:"A patient develops a new adverse condition as a direct result of their treatment for an unrelated illness. This is best termed a:", c:"Complication", w:["Sequela","Syndrome","Carrier state"]},
+      {q:"Chronic fatigue syndrome is a named example of a:", c:"Syndrome — a compilation of characteristic signs and symptoms", w:["Definitive disease diagnosis naming the exact cause","A single isolated symptom","An etiologic diagnosis"]},
+      {q:"A patient appears clinically well but has a disease of moderate duration and severity, between acute and chronic. This stage is:", c:"Subacute", w:["Preclinical","Acute","Chronic"]},
+      {q:"A disease stage where signs and symptoms have not yet developed enough to allow a specific diagnosis is called:", c:"Preclinical", w:["Subacute","Acute","Chronic"]},
+      {q:"Diabetes mellitus persisting over years, sometimes leading to disability, best illustrates a disease that is:", c:"Chronic and potentially progressive", w:["Preclinical and undiagnosable","Acute and self-limiting","Idiopathic with no known risk factors"]},
+      {q:"A person shows no symptoms but can still transmit a pathogen to others. This person is best described as a:", c:"Carrier", w:["Index case","Vector organism","Subacute patient"]},
+      {q:"Which best distinguishes 'exposure without infection' from 'infection without clinical illness' in the Iceberg Concept?", c:"In the first, the pathogen never establishes infection; in the second, infection occurs but produces no visible illness", w:["They are the same layer of the iceberg","The first always leads to death; the second never does","Only the second layer is detectable by any test"]},
+      {q:"Why does the Iceberg Concept imply that clinical surveillance underestimates a population's true disease burden?", c:"Most cases sit in the hidden lower layers — exposure and subclinical infection — never becoming clinically visible", w:["Because most diseases are congenital","Because pandemics never involve mild illness","Because clinical diagnosis is always more sensitive than lab testing"]},
+      {q:"A patient's inherited enzyme deficiency would be classified under the intrinsic/extrinsic wheel as:", c:"Intrinsic — inherited/metabolic", w:["Extrinsic — physical agent","Extrinsic — infectious agent","Unknown — idiopathic"]},
+      {q:"A worm infestation causing tissue damage would be classified under the intrinsic/extrinsic wheel as:", c:"Extrinsic — infectious/animate agent", w:["Intrinsic — degenerative","Intrinsic — psychogenic","Unknown — idiopathic"]},
+      {q:"In the Tree of Medicine, which best describes the relationship between the roots and the trunk?", c:"Foundational sciences (roots) provide the basis on which general pathology (trunk) is built", w:["The trunk provides the basis for the roots","Roots and trunk represent the same level of knowledge","The roots represent clinical specialties"]},
+      {q:"In the Tree of Medicine, systemic pathology and clinical specialties occupy which position?", c:"The canopy, built upon the trunk of general pathology", w:["The roots, beneath general pathology","The trunk itself","Outside the tree structure entirely"]},
+      {q:"In the Host–Pathogen–Treatment framework, 'where did it come from?' primarily helps identify:", c:"The source of the pathogen, relevant to etiology", w:["The treatment's side effects only","The patient's family history only","The statistical normal range for lab values"]},
+      {q:"Which best explains why atherosclerosis is described as the pathogenesis, not the etiology, of coronary heart disease?", c:"It describes how the disease evolves (fatty streak to occlusion), while its true underlying cause remains uncertain", w:["Atherosclerosis has a single, fully known cause","Pathogenesis and etiology are the same by definition here","Coronary heart disease has no known pathogenesis"]},
+      {q:"A physician orders imaging to describe a lesion's size and location without yet sampling tissue. This approach primarily supports which diagnostic type?", c:"Morphologic diagnosis", w:["Etiologic diagnosis only","Disease (definitive) diagnosis only","Differential diagnosis exclusively"]},
+      {q:"Which best distinguishes a surgical pathologist's typical task from a clinical pathologist's typical task?", c:"Surgical pathologists study tissue specimens (often intra-operatively); clinical pathologists perform lab-based studies like serology", w:["Clinical pathologists never examine tissue","Surgical pathologists exclusively use serology","Both roles are functionally identical"]},
+      {q:"A disease shows pallor and low blood pressure on examination, alongside patient-reported fatigue. Which pairing is correct?", c:"Pallor and low blood pressure = signs; fatigue = symptom", w:["All three are symptoms","All three are signs","Fatigue is a sign; pallor is a symptom"]},
+      {q:"Which best explains why 'normal' laboratory values are population-based rather than absolute?", c:"They are derived statistically from a reference population's distribution of results", w:["They are set individually for each patient at birth","They never change regardless of the population studied","They are defined only by the treating physician's judgment"]},
+      {q:"A newly emerging pathogen spreads within one country before being detected in several other countries. According to the lecture, the correct epidemiologic term once it spans multiple continents is:", c:"Pandemic", w:["Endemic","Sporadic case","Preclinical outbreak"]},
+      {q:"Which best differentiates 'risk factor' from 'etiologic agent' in a multifactorial disease?", c:"A risk factor predisposes to disease without being a single sufficient cause, unlike a directly causative etiologic agent", w:["They are the same concept under different names","A risk factor always guarantees disease onset","An etiologic agent is only ever nutritional"]},
+      {q:"Which combination correctly matches an etiologic agent category to an example from the lecture?", c:"Chemical — alcohol", w:["Physical — bacteria","Nutritional — radiation","Biologic — trauma"]},
+      {q:"A disease's clinical course moves from sudden severe onset toward either recovery, chronicity, or death. This describes the:", c:"Acute stage", w:["Preclinical stage","Subacute stage","Idiopathic stage"]},
+      {q:"Which best explains the difference between the two definitions of 'diagnosis' given in the lecture?", c:"One is recognizing disease by outward signs; the other is analyzing its underlying physiological cause", w:["Both definitions describe exactly the same process","One refers only to lab testing, the other only to imaging","One applies only to congenital disease"]},
+      {q:"A biopsy sample shows fibrinous, locally-extensive lung inflammation, described without naming an organism. This best represents a:", c:"Morphologic diagnosis", w:["Etiologic diagnosis","Disease (definitive) diagnosis","Differential diagnosis"]},
+      {q:"Which statement best reflects the relationship between morphologic changes and clinical manifestations?", c:"The nature and distribution of morphologic changes influence the specific symptoms, signs, and course of a disease", w:["Morphologic changes have no bearing on clinical symptoms","Clinical manifestations always precede morphologic change","Only chronic diseases show morphologic changes"]},
+      {q:"Which best distinguishes an idiopathic disease from a multifactorial disease?", c:"Idiopathic means the cause is unknown; multifactorial means multiple known factors contribute", w:["They are synonyms in the lecture's framework","Multifactorial diseases always have unknown causes","Idiopathic diseases can never be studied for pathogenesis"]},
+      {q:"A patient's morphologic diagnosis describes only the lesion, while a separate step later names the causative bacterium. This second step corresponds to:", c:"Etiologic diagnosis", w:["Clinical diagnosis","Preclinical diagnosis","Differential diagnosis"]},
+      {q:"Which best explains why general pathology, not systemic pathology, is positioned as foundational to every clinical specialty?", c:"It covers the basic cellular and tissue reactions common to all disease, which every specialty builds upon", w:["It studies only rare congenital diseases","It focuses solely on a single named organ","It replaces the need for foundational sciences entirely"]},
+      {q:"Which best captures why pathophysiology is described as not dealing directly with treatment?", c:"It explains the disease processes producing signs and symptoms, which then inform — but are distinct from — treatment decisions", w:["It has no relevance to clinical care at all","It is identical in scope to pharmacology","It only applies to surgical specialties"]}
+    ],
+    hard: [
+      {q:"A 10-year-old with neck rigidity and vomiting dies before full work-up; necropsy reveals Neisseria meningitidis causing inflammation of the pia mater and arachnoid. Before the necropsy, when only 'acute meningitis' had been documented from history and exam, which diagnostic modality had been reached?", c:"Clinical diagnosis only", w:["Disease (definitive) diagnosis already","Etiologic diagnosis already","Morphologic diagnosis already"]},
+      {q:"In the same case, once necropsy shows inflammation of the pia mater and arachnoid but the organism has not yet been identified, which diagnostic modality has just been added?", c:"Morphologic diagnosis", w:["Etiologic diagnosis","Disease (definitive) diagnosis","Differential diagnosis"]},
+      {q:"Once culture confirms a bacterial cause but before speciation, the diagnosis 'bacterial meningitis' represents which modality?", c:"Etiologic diagnosis", w:["Morphologic diagnosis","Clinical diagnosis","Disease (definitive) diagnosis"]},
+      {q:"Once the organism is speciated as Neisseria meningitidis, the diagnosis has reached which final modality?", c:"Disease (definitive) diagnosis", w:["Clinical diagnosis","Morphologic diagnosis","Differential diagnosis"]},
+      {q:"A disease has a well-mapped pathogenesis (fatty streak → occlusive lesion) but the lecture states its true etiology 'remains largely uncertain.' What does this best demonstrate about the disease-process framework?", c:"Pathogenesis can be extensively characterized even when etiology is not fully resolved", w:["Etiology must always be known before pathogenesis can be studied","Pathogenesis and etiology are functionally identical concepts","A disease without known etiology cannot progress through defined stages"]},
+      {q:"A population has steady, low-level case counts of a disease for years (endemic), then a sharp, sustained rise substantially above that baseline before declining back down. What is the most accurate epidemiologic description of the rise?", c:"An epidemic superimposed on an underlying endemic pattern", w:["A new, permanently higher endemic baseline was established","A pandemic, because case counts changed dramatically","A shift from acute to chronic disease at the population level"]},
+      {q:"A person is exposed to a pathogen, becomes infected, but never develops clinical illness, and is never tested. According to the Iceberg Concept, where does this person sit, and what is the practical consequence for surveillance?", c:"They occupy the 'infection without clinical illness' layer and are invisible to clinical-case-based surveillance", w:["They occupy the 'death' layer and are counted in mortality statistics","They occupy 'exposure without infection' and pose no transmission risk","They are automatically classified as a carrier requiring isolation"]},
+      {q:"A chronic condition is described as 'progressive' in the lecture's sense. Which outcome is most consistent with this description?", c:"Gradual worsening over time, potentially resulting in disability", w:["Full recovery within days","A single, self-limited severe episode","Resolution without any lasting structural change"]},
+      {q:"A newborn is later found to have a defect caused by a combination of a genetic mutation and maternal drug use during pregnancy. Which single classification correctly captures both the timing and cause of this defect?", c:"Congenital, with combined genetic and environmental etiology", w:["Acquired, purely environmental in origin","Idiopathic, since two factors are involved","Iatrogenic, since maternal drug use was involved"]},
+      {q:"Which best explains why a single traumatic event, such as a major burn, can lead to disease in multiple organ systems simultaneously?", c:"Most disease-causing agents are nonspecific and are not restricted to a single organ", w:["Trauma is always classified as a biologic agent","Multi-organ involvement only occurs in congenital disease","Physical agents cannot affect more than one organ by definition"]},
+      {q:"A patient's tachycardia after significant blood loss is documented as a 'sign.' Which interpretation is most consistent with the lecture's framework?", c:"It most likely represents the body's compensatory response rather than the primary lesion itself", w:["It is unrelated to the underlying disease process","It must be the primary disorder, since it is objectively measurable","It cannot be classified as either primary or compensatory"]},
+      {q:"A lab value falls outside the mean ± 2 SD reference range in an otherwise asymptomatic patient. Which conclusion is most defensible under the lecture's statistical definition of 'normal'?", c:"The value is statistically atypical, but the patient may still be physiologically healthy", w:["The patient definitely has subclinical disease","The lab test must have been performed incorrectly","A 95% reference range guarantees the patient is diseased"]},
+      {q:"Which best explains why 'differential diagnosis' is a necessary step even after a clinical diagnosis has been made?", c:"A clinical diagnosis based on history and exam alone may fit several possible conditions, which the differential diagnosis is meant to narrow down", w:["A clinical diagnosis is always equivalent to a definitive diagnosis","Differential diagnosis replaces the need for any further testing","Differential diagnosis is only used in idiopathic disease"]},
+      {q:"A disease is classified as multifactorial. Which of the following best characterizes how its 'etiologic diagnosis' would typically be framed?", c:"As a set of contributing risk factors rather than a single definitive cause", w:["As a single named organism in all cases","As always idiopathic, since no single cause exists","As identical to its morphologic diagnosis"]},
+      {q:"Which best explains why the lecture separates 'complication' from 'sequela' rather than treating them as synonyms?", c:"A complication is an adverse extension of disease or its treatment, while a sequela specifically follows from or is caused by the disease itself as a lasting impairment", w:["A complication always occurs before diagnosis, while a sequela occurs after","Sequelae only occur in infectious disease","Complications never involve the treatment of a disease"]},
+      {q:"A patient's chronic arthritis is described as an example in the lecture. Which best explains why chronic disease is not automatically 'less dangerous' than acute disease despite often being less severe symptomatically?", c:"Chronic disease may still be progressive and can result in disability or death over time", w:["Chronic disease is always fully reversible","Chronic disease excludes the possibility of complications","Only acute disease can ever cause disability"]},
+      {q:"A patient is asymptomatic, has no detectable clinical findings, yet is later confirmed to be shedding an infectious organism to others. Which two lecture concepts does this scenario most directly combine?", c:"The 'carrier' concept and the lower layers of the Iceberg Concept of disease", w:["The concept of a syndrome and a complication","The concept of pathogenesis and a chronic disease stage","The concept of a sequela and an idiopathic disease"]},
+      {q:"Which best explains why histologic examination is described as playing 'an important role' specifically in cancer diagnosis, more so than in many other conditions?", c:"Microscopic morphologic changes are often essential to distinguishing malignant from benign tissue, more than gross findings alone can provide", w:["Cancer never produces any gross anatomic changes","Histology is irrelevant to any diagnosis besides cancer","Clinical diagnosis alone is always sufficient for cancer"]},
+      {q:"A patient's disease is intrinsic (inherited) in origin but is triggered into clinical expression by an extrinsic environmental exposure. Which best reflects the lecture's view of such cases?", c:"Many diseases result from a genetic predisposition combined with an environmental triggering event", w:["Intrinsic and extrinsic causes are always mutually exclusive in a single case","Only extrinsic causes can trigger disease expression","Genetic predisposition alone is always sufficient to cause disease, regardless of environment"]},
+      {q:"Which best explains why an epidemic does not, by the lecture's definition, require the disease to be previously unknown in that population?", c:"Epidemic status depends on case counts substantially exceeding recent expected experience, regardless of whether the disease was previously endemic", w:["Only diseases with entirely new pathogens can become epidemics","Epidemics can only occur in populations with no prior endemic cases","Epidemic and endemic are mutually exclusive terms describing the same threshold"]},
+      {q:"A researcher studies a disease of completely unknown cause and successfully documents its pathogenesis, morphologic changes, and clinical course in detail. Which term best classifies this disease's etiologic status?", c:"Idiopathic", w:["Multifactorial","Iatrogenic","Congenital"]},
+      {q:"Which best explains why 'where did it come from?' and 'where did it go?' are both essential questions in the Host–Pathogen–Treatment framework, rather than redundant with each other?", c:"One addresses the pathogen's origin (relevant to etiology and prevention), while the other tracks its spread through the host (relevant to treatment targeting)", w:["Both questions address exactly the same clinical information","Neither question has any bearing on treatment decisions","Only 'where did it go?' is relevant to a Host-Pathogen-Treatment framework"]},
+      {q:"A physician orders a biopsy rather than relying on imaging alone to characterize a suspicious lesion. Which best justifies this choice under the lecture's framework?", c:"Biopsy allows histologic study that can provide morphologic — and potentially etiologic — detail beyond what imaging alone typically shows", w:["Imaging always provides more diagnostic detail than biopsy","Biopsy is used exclusively for congenital disease","Imaging and biopsy provide identical diagnostic information"]},
+      {q:"A pathologist observes that a disease-causing agent frequently damages more than one organ system, while several different agents can independently damage the same organ. What foundational principle does this best illustrate?", c:"Most disease-causing agents are nonspecific in their organ targeting", w:["All etiologic agents are strictly organ-specific","Multi-organ disease only occurs with biologic agents","This pattern only applies to idiopathic disease"]},
+      {q:"Which best explains the diagnostic logic behind ordering laboratory tests only after history and physical examination, rather than before?", c:"History and physical exam generate the clinical picture and differential diagnosis that lab and imaging tests are then used to confirm or narrow", w:["Lab tests are only used when history and physical exam are unavailable","Lab tests always replace the need for history-taking","The order has no diagnostic rationale and is arbitrary"]},
+      {q:"A patient's signs and symptoms are entirely attributable to the body's compensation for an underlying lesion rather than the lesion itself. Which statement best reflects the lecture's position on this scenario?", c:"Many pathologic states cannot be observed directly, so what is often observed clinically is the body's attempt to compensate for altered function", w:["This scenario is inconsistent with how disease normally presents clinically","Compensatory signs are clinically irrelevant to diagnosis","Only symptoms, never signs, can reflect compensation"]},
+      {q:"Which best explains why the Tree of Medicine places 'general pathology' as the trunk rather than merging it directly into the roots alongside anatomy and physiology?", c:"General pathology represents the basic disease reactions built upon the foundational sciences, forming the shared foundation for every specialty above it — distinct from the foundational sciences themselves", w:["General pathology and the foundational sciences are functionally identical","The roots represent clinical specialties, not basic sciences","General pathology has no direct relationship to the foundational sciences"]},
+      {q:"A disease shows different predominant signs depending on which organ system is most affected — for example, respiratory signs versus intestinal signs in anemia. Which principle from the lecture best explains this variability?", c:"The distribution of morphologic changes across organs and tissues determines the specific clinical features that appear", w:["All diseases must present identically regardless of organ involvement","Clinical manifestations are unrelated to morphologic distribution","Only chronic diseases can show organ-specific signs"]},
+      {q:"A clinician correctly diagnoses 'acute meningitis' from history and exam alone, without any further testing. According to the lecture, has a definitive diagnosis been reached?", c:"No — only a clinical diagnosis has been reached; further steps are needed for morphologic, etiologic, and definitive diagnosis", w:["Yes, clinical diagnosis is equivalent to definitive diagnosis","Yes, because meningitis is always self-evident from symptoms alone","No, because clinical diagnosis is not a valid diagnostic modality at all"]},
+      {q:"Which best explains why the lecture states most diseases are 'multifactorial,' rather than caused by a single etiologic agent?", c:"Disease-causing agents are largely nonspecific, and predisposing risk factors typically combine to produce conditions like cancer, heart disease, and diabetes", w:["Multifactorial simply means the cause is completely unknown","Single-agent causation is the norm, and multifactorial disease is rare","Only chronic diseases can ever be multifactorial"]},
+      {q:"A public health team notes rising case counts of a known endemic disease that substantially exceed the historical baseline for that specific period. Which classification is most appropriate, and why does the historical baseline matter?", c:"Epidemic — because epidemic status is defined relative to what recent experience would predict, not an absolute case count", w:["Pandemic — because any rise above baseline automatically qualifies","Endemic — because the disease was already present in the population","Preclinical — because case counts are an early clinical marker"]},
+      {q:"Which best explains why a carrier is epidemiologically important even though they meet no criteria for being clinically 'diseased'?", c:"A carrier can still act as a distributor of infection to others despite showing no manifest symptoms themselves", w:["Carriers are, by definition, always eventually symptomatic","Carriers cannot transmit disease under any circumstances","Carrier status is only relevant to congenital disease"]},
+      {q:"Which best explains why establishing pathogenesis (e.g., fatty streak to occlusive lesion in atherosclerosis) does not, by itself, establish etiology?", c:"Pathogenesis describes how the disease process evolves, while etiology addresses what specifically set that process in motion — the two questions are logically distinct", w:["Pathogenesis and etiology always yield the same answer once either is known","Etiology is simply the final stage of pathogenesis","Only laboratory testing, not disease progression, can reveal pathogenesis"]},
+      {q:"Which best explains the diagnostic value of documenting a lesion's severity, duration, distribution, location, and nature together, rather than any single feature alone?", c:"Together, these features constitute a complete morphologic diagnosis that more precisely characterizes the disease process than any one feature alone", w:["Only severity is diagnostically meaningful; the others are optional detail","Duration and distribution are irrelevant to morphologic diagnosis","A single feature, such as location, is always sufficient for diagnosis"]},
+      {q:"A disease's clinical course is described as potentially ending in 'recovery, passage into a chronic phase, or death' following its acute stage. Which best reflects the significance of listing three distinct possible outcomes?", c:"The acute stage is not inherently predictive of a single outcome — its resolution can follow multiple distinct trajectories", w:["Acute disease always ends in full recovery","Acute disease always progresses to a chronic phase","Death is the only possible outcome of untreated acute disease"]},
+      {q:"Which best explains why 'iatrogenic' causes are grouped with physical/chemical extrinsic causes rather than treated as an entirely separate category in the wheel diagram?", c:"Iatrogenic disease typically results from a physical or chemical intervention (such as a drug or procedure) originating outside the patient's own body", w:["Iatrogenic causes always originate from the patient's own genetics","Iatrogenic causes are classified as intrinsic because they come from treatment decisions","Iatrogenic disease is a subtype of infectious disease"]},
+      {q:"Which best explains why the lecture describes epidemiology as 'the cornerstone of public health'?", c:"It identifies risk factors and disease patterns across populations, directly informing prevention and evidence-based medicine", w:["It replaces the need for individual patient diagnosis entirely","It is only relevant to infectious, not chronic, disease","It focuses solely on treatment protocols rather than disease patterns"]},
+      {q:"A disease's etiologic diagnosis names only a general cause category (e.g., 'viral'), while its definitive diagnosis would name the exact virus. Which best explains why both levels of diagnosis have independent clinical value?", c:"An etiologic diagnosis can guide broad treatment decisions sooner, while a definitive diagnosis enables the most targeted, organism-specific management", w:["Only the definitive diagnosis has any clinical value","Etiologic diagnosis is functionally identical to clinical diagnosis","Definitive diagnosis is unnecessary once an etiologic diagnosis is made"]},
+      {q:"Which best explains why the lecture treats 'diagnosis' as having two distinct dictionary definitions rather than one unified meaning?", c:"Diagnosis can mean recognizing disease from outward signs, or separately, analyzing its underlying physiological or biochemical cause — two related but distinct clinical tasks", w:["The two definitions are simply redundant restatements of each other","Only the first definition is used in modern clinical pathology","The second definition applies only to psychiatric disease"]},
+      {q:"Considering all six aspects of the disease process together, which best describes their overall relationship?", c:"Etiology sets the process in motion, pathogenesis describes its evolution, morphologic changes and clinical manifestations reflect its structural and functional expression, and diagnosis and clinical course describe how it is recognized and how it unfolds over time — each aspect builds on the others", w:["The six aspects are entirely independent and never influence one another","Only etiology and diagnosis are meaningfully related; the rest are unrelated","Clinical course must be determined before etiology can be studied"]}
+    ]
+  };
+
+  function shuffle(arr){
+    var a = arr.slice();
+    for(var i=a.length-1;i>0;i--){
+      var j = Math.floor(Math.random()*(i+1));
+      var t=a[i]; a[i]=a[j]; a[j]=t;
+    }
+    return a;
+  }
+
+  function buildQuizData(level){
+    return quizLevels[level].map(function(item){
+      var opts = shuffle([item.c].concat(item.w));
+      return {q:item.q, options:opts, correct:item.c, answered:false, selected:null};
+    });
+  }
+
+  var activeQuizLevel = "easy";
+  var quizData = buildQuizData(activeQuizLevel);
+
+  var qi = 0;
+  var score = 0;
+  var quizQ = document.getElementById('quizQ');
+  var quizOptions = document.getElementById('quizOptions');
+  var quizProgress = document.getElementById('quizProgress');
+  var quizScore = document.getElementById('quizScore');
+  var quizFeedback = document.getElementById('quizFeedback');
+  var progressFill = document.getElementById('progressFill');
+  var quizNext = document.getElementById('quizNext');
+  var quizPrev = document.getElementById('quizPrev');
+  var quizJump = document.getElementById('quizJump');
+  var quizLevelsEl = document.getElementById('quizLevels');
+  var quizCard = document.getElementById('quizCard');
+  var letters = ['A','B','C','D'];
+  var quizLevelMeta = {easy:"Level 1 — Easy", medium:"Level 2 — Medium", hard:"Level 3 — Hard"};
+
+  Object.keys(quizLevelMeta).forEach(function(lvl){
+    var b = document.createElement('button');
+    b.className = 'fc-filter' + (lvl==='easy' ? ' active' : '');
+    b.textContent = quizLevelMeta[lvl];
+    b.addEventListener('click', function(){
+      activeQuizLevel = lvl;
+      quizLevelsEl.querySelectorAll('.fc-filter').forEach(function(f){ f.classList.remove('active'); });
+      b.classList.add('active');
+      resetQuizCard();
+      quizData = buildQuizData(activeQuizLevel);
+      qi = 0; score = 0;
+      buildJumpButtons();
+      renderQuiz();
+    });
+    quizLevelsEl.appendChild(b);
+  });
+
+  function resetQuizCard(){
+    quizCard.innerHTML =
+      '<p class="quiz-q" id="quizQ"></p>' +
+      '<div class="quiz-options" id="quizOptions"></div>' +
+      '<div class="quiz-foot">' +
+        '<span class="quiz-feedback" id="quizFeedback"></span>' +
+        '<div style="display:flex; gap:8px;">' +
+          '<button class="quiz-btn ghost" id="quizPrev">Previous</button>' +
+          '<button class="quiz-btn" id="quizNext" disabled>Next</button>' +
+        '</div>' +
+      '</div>';
+    quizQ = document.getElementById('quizQ');
+    quizOptions = document.getElementById('quizOptions');
+    quizFeedback = document.getElementById('quizFeedback');
+    quizNext = document.getElementById('quizNext');
+    quizPrev = document.getElementById('quizPrev');
+    quizNext.addEventListener('click', onQuizNext);
+    quizPrev.addEventListener('click', function(){ if(qi>0){ qi--; renderQuiz(); } });
+  }
+
+  function buildJumpButtons(){
+    quizJump.innerHTML = '';
+    quizData.forEach(function(_, idx){
+      var jb = document.createElement('button');
+      jb.textContent = idx+1;
+      jb.addEventListener('click', function(){ qi = idx; renderQuiz(); });
+      quizJump.appendChild(jb);
+    });
+  }
+  buildJumpButtons();
+
+  function updateScore(){
+    var answered = quizData.filter(function(d){return d.answered;});
+    var correctCount = answered.filter(function(d){return d.selected===d.correct;}).length;
+    score = correctCount;
+    quizScore.textContent = 'Score: ' + correctCount + ' / ' + answered.length;
+  }
+
+  function renderQuiz(){
+    var item = quizData[qi];
+    quizQ.textContent = item.q;
+    quizProgress.textContent = 'Question ' + (qi+1) + ' / ' + quizData.length + ' · ' + quizLevelMeta[activeQuizLevel];
+    progressFill.style.width = (((qi+1)/quizData.length)*100) + '%';
+    quizOptions.innerHTML = '';
+    quizFeedback.textContent = item.answered ? (item.selected===item.correct ? 'Correct.' : 'Not quite — correct answer highlighted.') : '';
+    item.options.forEach(function(opt, i){
+      var b = document.createElement('button');
+      b.className = 'quiz-opt';
+      b.innerHTML = '<span class="letter">' + letters[i] + '</span><span>' + opt + '</span>';
+      if(item.answered){
+        b.classList.add('locked');
+        if(opt===item.correct) b.classList.add('correct');
+        else if(opt===item.selected) b.classList.add('wrong');
+      }
+      b.addEventListener('click', function(){
+        if(item.answered) return;
+        item.answered = true;
+        item.selected = opt;
+        updateScore();
+        renderQuiz();
+      });
+      quizOptions.appendChild(b);
+    });
+    quizNext.disabled = !item.answered;
+    quizPrev.disabled = qi===0;
+    quizNext.textContent = (qi === quizData.length-1) ? 'Finish' : 'Next';
+    updateScore();
+    document.querySelectorAll('.quiz-jump button').forEach(function(b, idx){
+      b.classList.toggle('done', quizData[idx].answered);
+      b.classList.toggle('current', idx===qi);
+    });
+  }
+
+  function onQuizNext(){
+    if(qi < quizData.length-1){ qi++; renderQuiz(); }
+    else{
+      var answered = quizData.filter(function(d){return d.answered;});
+      var correctCount = answered.filter(function(d){return d.selected===d.correct;}).length;
+      quizCard.innerHTML =
+        '<div class="quiz-summary"><span class="big">' + correctCount + ' / ' + quizData.length + '</span>' +
+        '<p style="color:var(--ink-soft); margin-top:8px;">Questions answered correctly at ' + quizLevelMeta[activeQuizLevel] + '. Switch level or reload the page for a fresh shuffle.</p></div>';
+    }
+  }
+
+  quizNext.addEventListener('click', onQuizNext);
+  quizPrev.addEventListener('click', function(){ if(qi>0){ qi--; renderQuiz(); } });
+
+  renderQuiz();
+
+})();
+</script>
+</body>
+</html>
