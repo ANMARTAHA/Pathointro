@@ -836,7 +836,6 @@
     <h2 class="panel-title">Flashcards</h2>
     <p class="panel-lede">Choose a difficulty level, then tap a card to flip it.</p>
     <div class="fc-toolbar" id="fcLevels"></div>
-    <div class="fc-toolbar" id="fcFilters"></div>
     <div class="fc-count" id="fcCount"></div>
     <div class="fc-grid" id="fcGrid"></div>
   </section>
@@ -1048,65 +1047,59 @@
   /* ---------------- Flashcards ---------------- */
   // l = difficulty level: 1 = easy · 2 = medium · 3 = hard
   var flashcards = [
-    /* ===== LEVEL 1 — EASY (25) ===== */
-    {l:1, cat:"Definitions", term:"Pathology", def:"The study (logos) of suffering (pathos) — the structural and functional changes in cells, tissues, and organs that underlie disease."},
-    {l:1, cat:"Definitions", term:"Pathophysiology", def:"The physiology of altered health. It explains the processes that produce a disease's signs and symptoms; it does not deal with treatment directly."},
-    {l:1, cat:"Definitions", term:"Disease", def:"Any condition that impairs the normal functioning of an organism or body."},
-    {l:1, cat:"Roles", term:"Surgical pathologist", def:"Studies disease through tissue specimens removed during surgery, often examined intra-operatively with frozen or paraffin sections."},
-    {l:1, cat:"Roles", term:"Clinical pathologist", def:"Studies disease in the laboratory — hematology, bacteriology, chemistry, and serology."},
-    {l:1, cat:"Definitions", term:"General pathology", def:"The basic reactions of cells and tissues to abnormal stimuli that underlie all disease — inflammation, cell injury, repair, hemodynamic disorders, immunity, neoplasia, genetic and infectious disease."},
-    {l:1, cat:"Definitions", term:"Systemic pathology", def:"The study of the specific responses of specialized organs and tissues to more or less well-defined stimuli."},
-    {l:1, cat:"Etiology", term:"Etiology", def:"The cause(s) of disease — what sets the disease process in motion."},
-    {l:1, cat:"Etiology", term:"The four groups of etiologic agents", def:"Biologic (bacteria, viruses), physical (trauma, burns, radiation), chemical (poisons, alcohol), and nutritional (excesses or deficits)."},
-    {l:1, cat:"Pathogenesis", term:"Pathogenesis", def:"The sequence of events in the response of cells or tissues to the etiologic agent, from the initial stimulus to the ultimate expression of disease — how the disease evolves."},
-    {l:1, cat:"Morphology", term:"Morphology", def:"The fundamental structure or form of cells or tissues. Morphologic changes include both gross anatomic and microscopic changes characteristic of a disease."},
-    {l:1, cat:"Morphology", term:"Lesion", def:"A pathologic or traumatic discontinuity of a body organ or tissue."},
-    {l:1, cat:"Signs & symptoms", term:"Symptom", def:"A subjective complaint noted by the person with the disorder (e.g. pain, dizziness, difficulty breathing)."},
-    {l:1, cat:"Signs & symptoms", term:"Sign", def:"An objective manifestation noted by an observer (e.g. fever, swollen extremity, change in pupil size)."},
-    {l:1, cat:"Signs & symptoms", term:"Syndrome", def:"A compilation of signs and symptoms characteristic of a specific disease state, e.g. chronic fatigue syndrome."},
-    {l:1, cat:"Signs & symptoms", term:"Complication", def:"A possible adverse extension of a disease or an outcome of its treatment."},
-    {l:1, cat:"Signs & symptoms", term:"Sequela", def:"A lesion or impairment that follows or is caused by a disease."},
-    {l:1, cat:"Diagnosis", term:"Differential diagnosis", def:"A list of diagnoses (‘rule-outs’) that could account for the history, signs, or lesions found in a case."},
-    {l:1, cat:"Clinical course", term:"Acute disease", def:"Relatively sudden onset of usually severe symptoms; it resolves into recovery, a chronic phase, or death."},
-    {l:1, cat:"Clinical course", term:"Chronic disease", def:"Persists over a long period; may be progressive, disabling, or fatal — e.g. diabetes mellitus, emphysema, arthritis."},
-    {l:1, cat:"Clinical course", term:"Carrier", def:"A person who harbors a disease organism without manifest symptoms and can still spread the infection to others."},
-    {l:1, cat:"Epidemiology", term:"Epidemiology", def:"The study of the patterns, causes, and effects of health and disease in defined populations — the cornerstone of public health."},
-    {l:1, cat:"Epidemiology", term:"Endemic disease", def:"A disease maintained in a population without the need for external inputs."},
-    {l:1, cat:"Epidemiology", term:"Epidemic disease", def:"New cases in a given population and period substantially exceed what recent experience would predict."},
-    {l:1, cat:"Epidemiology", term:"Pandemic", def:"An epidemic that has spread across a large region — multiple continents or worldwide (e.g. H1N1 influenza, COVID-19)."},
-
-    /* ===== LEVEL 2 — MEDIUM (15) ===== */
-    {l:2, cat:"Pathogenesis", term:"Distinguish etiology from pathogenesis in one line each.", def:"<b>Etiology</b> = <i>what</i> starts the disease process (the cause). <b>Pathogenesis</b> = <i>how</i> the disease evolves, from first stimulus to full expression."},
-    {l:2, cat:"Definitions", term:"List the six aspects of the disease process.", def:"1) Etiology 2) Pathogenesis 3) Morphologic changes 4) Clinical manifestations 5) Diagnosis 6) Clinical course."},
-    {l:2, cat:"Etiology", term:"A heart defect is present at birth but is only discovered at age 20. Congenital or acquired — and why?", def:"<b>Congenital.</b> It was present at birth even though it did not become evident until later. Congenital defects are genetic, environmental, or both."},
-    {l:2, cat:"Etiology", term:"Name the post-birth events that cause acquired defects.", def:"Injury, infectious agents, inadequate nutrition, lack of oxygen (hypoxia), inappropriate immune responses, and neoplasia."},
-    {l:2, cat:"Etiology", term:"Why are most diseases called multifactorial, and what are the contributing factors called?", def:"Most agents are non-specific: one agent can affect several organs and several agents can affect one organ. So there is no single cause — contributing <b>risk factors</b> (e.g. in cancer, heart disease, diabetes) combine."},
-    {l:2, cat:"Etiology", term:"Define idiopathic and iatrogenic disease.", def:"<b>Idiopathic</b> — the cause is unknown. <b>Iatrogenic</b> — caused by medical treatment itself (an extrinsic, physical-agent cause)."},
-    {l:2, cat:"Morphology", term:"How do lesion, biopsy, and histology relate to each other?", def:"A <b>lesion</b> (discontinuity of tissue) can be shown by imaging (radiograph, ultrasound) or sampled by <b>biopsy</b>. The sample is studied by <b>histology</b>: thin, translucent sections viewed under a microscope — central to diagnosing many cancers."},
-    {l:2, cat:"Signs & symptoms", term:"After major blood loss a patient has tachycardia. Sign or symptom — and what does it represent?", def:"A <b>sign</b> (objective, observer-noted). It represents the body's attempt to <b>compensate</b> for altered function rather than the primary disorder itself."},
-    {l:2, cat:"Signs & symptoms", term:"An anemic patient reports fatigue and dizziness; the examiner finds pallor and a rapid pulse. Classify each.", def:"Fatigue and dizziness = <b>symptoms</b> (subjective). Pallor and rapid pulse = <b>signs</b> (objective). Severe anemia adds fainting, chest pain, angina, and heart attack."},
-    {l:2, cat:"Diagnosis", term:"Give the two dictionary meanings of ‘diagnosis’ and the three parts of the diagnostic process.", def:"(1) Recognition of disease by its outward signs and symptoms; (2) analysis of the underlying physiological/biochemical cause. Process: <b>history → physical examination → laboratory/imaging tests</b>."},
-    {l:2, cat:"Diagnosis", term:"How is a ‘normal’ laboratory value defined?", def:"Statistically, as the <b>95% distribution — mean ± 2 SD</b> — of results from a reference population."},
-    {l:2, cat:"Diagnosis", term:"A 10-year-old has neck rigidity and vomiting. Give the clinical, morphologic, etiologic, and definitive diagnoses.", def:"Clinical: acute meningitis. Morphologic: inflammation of the pia mater and arachnoid. Etiologic: bacterial meningitis. Definitive (disease): Neisseria meningitidis."},
-    {l:2, cat:"Clinical course", term:"Define the four stages used to describe clinical course, and say what an acute illness can resolve into.", def:"<b>Preclinical</b> — too early for a specific diagnosis. <b>Acute</b> — sudden, usually severe. <b>Subacute</b> — in between. <b>Chronic</b> — long-lasting. Acute disease resolves into recovery, chronicity, or death."},
-    {l:2, cat:"Epidemiology", term:"Describe the iceberg concept of disease from tip to base.", def:"Death → severe disease → mild illness → infection without clinical illness → exposure without infection. Only the tip (severe disease, death) is clinically visible."},
-    {l:2, cat:"Etiology", term:"State the four questions of the Host–Pathogen–Treatment framework and what each addresses.", def:"<b>What is the bug?</b> identifies the pathogen. <b>What does it do?</b> the pathogenesis. <b>Where did it come from?</b> the source/reservoir (etiology). <b>Where did it go?</b> its spread in the host, guiding treatment."},
-
-    /* ===== LEVEL 3 — HARD (10) ===== */
-    {l:3, cat:"Etiology", term:"Classify each as intrinsic or extrinsic: psychogenic disorder, radiation burn, iatrogenic complication, metabolic disease, fungal infection, degenerative change.", def:"<b>Intrinsic:</b> psychogenic, metabolic, degenerative. <b>Extrinsic:</b> radiation burn (physical agent), iatrogenic complication (physical agent), fungal infection (infectious agent). Cause not yet identified = unknown / idiopathic."},
-    {l:3, cat:"Pathogenesis", term:"Atherosclerosis progresses from fatty streak to occlusive lesion in coronary heart disease. Why is this pathogenesis rather than etiology, and what is the status of atherosclerosis's own cause?", def:"The progression is the <b>sequence of events</b> by which coronary heart disease evolves — i.e. pathogenesis (<i>how</i>). Etiology asks <i>what starts it</i>, and the true etiology of atherosclerosis itself remains largely uncertain."},
-    {l:3, cat:"Signs & symptoms", term:"A pneumonia patient has a raised respiratory rate. What does this finding tell you, and how does it differ from a finding of the primary disorder?", def:"It is an objective <b>sign</b>. Signs and symptoms either relate directly to the primary disorder or represent the body's attempt to <b>compensate</b>. A raised respiratory rate in pneumonia is compensatory, like tachycardia after blood loss."},
-    {l:3, cat:"Signs & symptoms", term:"Label: (a) a lesion left behind after a disease, (b) a harmful extension caused by treatment, (c) a recognizable cluster such as chronic fatigue.", def:"(a) <b>Sequela</b> — lesion/impairment following the disease. (b) <b>Complication</b> — adverse extension of disease or its treatment. (c) <b>Syndrome</b> — compilation of characteristic signs and symptoms."},
-    {l:3, cat:"Diagnosis", term:"Rank the four diagnostic modalities from least to most specific and state what each adds to the previous one.", def:"<b>Clinical</b> (history, signs, exam only) → <b>Morphologic</b> (adds the predominant lesion) → <b>Etiologic</b> (names the cause, e.g. bacterial) → <b>Disease/definitive</b> (names the actual disease, e.g. Neisseria meningitidis)."},
-    {l:3, cat:"Diagnosis", term:"Using mean ± 2 SD, can a healthy person have an ‘abnormal’ lab value? Explain.", def:"Yes. Normal covers only the central <b>95%</b> of a reference population, so about 5% of healthy individuals fall outside the range. An out-of-range value therefore needs interpretation with history and exam."},
-    {l:3, cat:"Clinical course", term:"Contrast a carrier, preclinical disease, and subacute disease with respect to symptoms and ability to diagnose or spread.", def:"<b>Carrier:</b> harbors the organism, no manifest symptoms, can still transmit. <b>Preclinical:</b> signs/symptoms not developed enough for a specific diagnosis. <b>Subacute:</b> intermediate duration/severity; person may appear clinically well."},
-    {l:3, cat:"Epidemiology", term:"Why does the iceberg concept warn that counting only severely ill patients underestimates disease burden?", def:"Only severe disease and death are clinically visible. Beneath the surface lie mild illness, infection without clinical illness, and exposure without infection — the larger hidden mass of the iceberg."},
-    {l:3, cat:"Epidemiology", term:"A disease sits at a steady low baseline, then spikes sharply, then spreads across several continents. Name each pattern and its defining feature.", def:"Baseline = <b>endemic</b> (maintained without outside input). Spike = <b>epidemic</b> (new cases substantially exceed what recent experience predicted). Multi-continent spread = <b>pandemic</b> (e.g. H1N1, COVID-19)."},
-    {l:3, cat:"Definitions", term:"In the Tree of Medicine, classify immunology, general pathology, and neurology — and explain the role of the trunk.", def:"Immunology = <b>root</b> (foundational science, with anatomy, embryology, histology, chemistry, pharmacology, physiology, cell biology, microbiology, genetics). General pathology = <b>trunk</b>, linking the basic sciences to clinical practice. Neurology = <b>canopy</b> (systemic pathology and clinical specialties)."}
+    {l:1, cat:"Definitions", term:"What is pathophysiology?", def:"The physiology of altered health."},
+    {l:1, cat:"Definitions", term:"What does “pathos” mean?", def:"Suffering."},
+    {l:1, cat:"Definitions", term:"What does “logos” mean?", def:"Study."},
+    {l:1, cat:"Definitions", term:"What does pathology study?", def:"The structural and functional changes in cells, tissues, and organs that underlie disease."},
+    {l:1, cat:"Definitions", term:"What does pathophysiology explain?", def:"The processes within the body that result in the signs and symptoms of disease."},
+    {l:1, cat:"Roles", term:"Who is a pathologist?", def:"A specialist in pathology."},
+    {l:1, cat:"Roles", term:"What does a surgical pathologist study?", def:"Disease by analysis of tissue specimens obtained during surgery."},
+    {l:1, cat:"Definitions", term:"Name two divisions of pathology.", def:"General pathology and systemic pathology."},
+    {l:1, cat:"Definitions", term:"What does general pathology study?", def:"Basic reactions of cells and tissues to abnormal stimuli underlying diseases."},
+    {l:1, cat:"Definitions", term:"What does systemic pathology study?", def:"Specific responses of specialized organs and tissues to defined stimuli."},
+    {l:1, cat:"Definitions", term:"What is a disease?", def:"Any condition that impairs the normal functioning of an organism or body."},
+    {l:1, cat:"Etiology", term:"What are etiologic factors?", def:"The causes of disease."},
+    {l:1, cat:"Etiology", term:"Name the recognized categories of etiologic agents.", def:"Biologic agents, physical forces, chemical agents, and nutritional excesses or deficits."},
+    {l:1, cat:"Pathogenesis", term:"What is pathogenesis?", def:"The sequence of events in the response of cells or tissues to an etiologic agent, from the initial stimulus to the ultimate expression of disease."},
+    {l:1, cat:"Morphology", term:"What does morphology mean?", def:"The fundamental structure or form of cells or tissues."},
+    {l:1, cat:"Signs & symptoms", term:"What is a symptom?", def:"A subjective complaint noted by the person with a disorder."},
+    {l:1, cat:"Signs & symptoms", term:"What is a sign?", def:"A manifestation noted by an observer."},
+    {l:1, cat:"Signs & symptoms", term:"What is a syndrome?", def:"A compilation of signs and symptoms characteristic of a specific disease state."},
+    {l:1, cat:"Signs & symptoms", term:"What are complications?", def:"Possible adverse extensions of a disease or outcomes from treatment."},
+    {l:1, cat:"Signs & symptoms", term:"What are sequelae?", def:"Lesions or impairments that follow or are caused by a disease."},
+    {l:1, cat:"Diagnosis", term:"What is diagnosis?", def:"Recognition of a disease or condition by its outward signs and symptoms, or analysis of its underlying physiological/biochemical causes."},
+    {l:1, cat:"Clinical course", term:"What is an acute disease course?", def:"A stage characterized by relatively sudden onset of symptoms that are usually severe."},
+    {l:1, cat:"Clinical course", term:"What is a chronic disease?", def:"A disease that persists over a long period."},
+    {l:1, cat:"Epidemiology", term:"What is epidemiology?", def:"The study of patterns, causes, and effects of health and disease conditions in defined populations."},
+    {l:1, cat:"Epidemiology", term:"What is a pandemic?", def:"An epidemic of infectious disease that has spread through human populations across a large region, such as multiple continents or worldwide."},
+    {l:2, cat:"Etiology", term:"Why does pathology use molecular, microbiologic, immunologic, and morphologic techniques?", def:"To explain the reasons and mechanisms underlying the signs and symptoms manifested by patients and provide a foundation for rational clinical care and therapy."},
+    {l:2, cat:"Definitions", term:"What is the main distinction between general and systemic pathology?", def:"General pathology studies basic cellular and tissue reactions to abnormal stimuli, while systemic pathology studies specific responses of specialized organs and tissues."},
+    {l:2, cat:"Etiology", term:"Why are most diseases considered multifactorial?", def:"Because most disease states do not have a single cause; multiple factors may predispose to disease and are often called risk factors."},
+    {l:2, cat:"Etiology", term:"What can cause congenital conditions?", def:"Genetic influences, environmental factors such as maternal viral infection, maternal drug use, irradiation, intrauterine crowding, or combinations of genetic and environmental factors."},
+    {l:2, cat:"Etiology", term:"What are acquired defects?", def:"Defects caused by events occurring after birth, including injury, infectious agents, inadequate nutrition, lack of oxygen, inappropriate immune responses, and neoplasia."},
+    {l:2, cat:"Pathogenesis", term:"How do etiology and pathogenesis differ?", def:"Etiology describes what sets the disease process in motion, whereas pathogenesis describes how the disease process evolves."},
+    {l:2, cat:"Morphology", term:"What do morphologic changes include?", def:"Gross anatomic and microscopic changes characteristic of a disease."},
+    {l:2, cat:"Morphology", term:"What is histology?", def:"The study of cells and extracellular matrix of body tissues."},
+    {l:2, cat:"Morphology", term:"How can lesions be evaluated according to the lecture?", def:"Their size and characteristics can be assessed by radiographs, ultrasonography, and other imaging methods; lesions can also be sampled by biopsy for histologic study."},
+    {l:2, cat:"Morphology", term:"How do morphologic changes influence disease manifestations?", def:"Their nature and distribution in organs or tissues influence normal function and determine clinical features, course, and prognosis."},
+    {l:2, cat:"Signs & symptoms", term:"What are two possible relationships of signs and symptoms to disease?", def:"They may be related to the primary disorder or represent the body’s attempt to compensate for altered function."},
+    {l:2, cat:"Signs & symptoms", term:"What is the difference between a complication and a sequela?", def:"A complication is a possible adverse extension of disease or outcome from treatment, whereas a sequela is a lesion or impairment that follows or is caused by disease."},
+    {l:2, cat:"Diagnosis", term:"What are the three major components commonly used in the diagnostic process?", def:"Careful history, physical examination, and laboratory/radiologic or other tests."},
+    {l:2, cat:"Diagnosis", term:"What is an etiologic diagnosis?", def:"A definitive diagnosis that identifies the specific or general cause of the disease."},
+    {l:2, cat:"Clinical course", term:"What distinguishes preclinical, subacute, and chronic disease?", def:"Preclinical disease lacks adequate signs and symptoms for a specific diagnosis; subacute disease is between acute and chronic and has moderate duration or severity; chronic disease persists over a long period."},
+    {l:3, cat:"Etiology", term:"How can one disease-causing agent and multiple disease-causing agents affect disease distribution?", def:"A single agent can lead to disease in several organs or systems, while different agents can cause disease in the same organ; therefore, many disease agents are nonspecific."},
+    {l:3, cat:"Pathogenesis", term:"Why should etiology and pathogenesis not be considered synonymous?", def:"Etiology identifies what initiates the disease process, whereas pathogenesis describes the sequence through which the disease process evolves."},
+    {l:3, cat:"Pathogenesis", term:"How does the atherosclerosis example illustrate pathogenesis?", def:"The progression from fatty streak to an occlusive vessel lesion represents the evolution of disease and therefore its pathogenesis, while the true etiology of atherosclerosis remains largely uncertain."},
+    {l:3, cat:"Etiology", term:"How can a disease be congenital even when it is not evident at birth?", def:"Congenital conditions are present at birth but may not become evident until later in life."},
+    {l:3, cat:"Etiology", term:"How can genetic and environmental factors interact in disease development?", def:"Many diseases may result from a genetic predisposition combined with an environmental event or events that act as a trigger for disease development."},
+    {l:3, cat:"Morphology", term:"How do morphologic changes become clinically important?", def:"Their nature and distribution in organs or tissues influence normal function and determine clinical features, disease course, and prognosis."},
+    {l:3, cat:"Signs & symptoms", term:"Why may signs observed in a disease not directly represent the diseased organ itself?", def:"Some manifestations represent the body’s attempt to compensate for functional changes caused by disease, such as tachycardia accompanying blood loss or increased respiratory rate occurring with pneumonia."},
+    {l:3, cat:"Diagnosis", term:"How does differential diagnosis differ from definitive disease diagnosis?", def:"Differential diagnosis is a list of possible diagnoses that could explain the history, signs, or lesions, whereas disease diagnosis specifically states the name of the disease."},
+    {l:3, cat:"Diagnosis", term:"What is the relationship between normal laboratory values and the reference population?", def:"Normal values are statistically established from test results obtained from a selected reference population and correspond to the 95% distribution, expressed as mean ± 2 standard deviations."},
+    {l:3, cat:"Epidemiology", term:"How are endemic, epidemic, and pandemic disease patterns distinguished?", def:"An endemic disease is maintained within a population without external inputs; an epidemic occurs when new cases substantially exceed what is expected during a specified period; a pandemic is an epidemic that spreads across a large region such as multiple continents or worldwide."},
   ];
 
   var fcGrid = document.getElementById('fcGrid');
-  var fcFilters = document.getElementById('fcFilters');
   var fcLevels = document.getElementById('fcLevels');
   var fcCount = document.getElementById('fcCount');
   var levelLabels = {1:"Level 1 · Easy", 2:"Level 2 · Medium", 3:"Level 3 · Hard"};
@@ -1123,28 +1116,10 @@
       fcLevel = l; activeCat = "All";
       fcLevels.querySelectorAll('.fc-filter').forEach(function(f){ f.classList.remove('active'); });
       b.classList.add('active');
-      buildCategoryFilters();
       renderFlashcards();
     });
     fcLevels.appendChild(b);
   });
-
-  function buildCategoryFilters(){
-    fcFilters.innerHTML = '';
-    var cats = ["All"].concat(Array.from(new Set(cardsForLevel(fcLevel).map(function(f){return f.cat;}))));
-    cats.forEach(function(c){
-      var b = document.createElement('button');
-      b.className = 'fc-filter' + (c===activeCat ? ' active' : '');
-      b.textContent = c;
-      b.addEventListener('click', function(){
-        activeCat = c;
-        fcFilters.querySelectorAll('.fc-filter').forEach(function(f){ f.classList.remove('active'); });
-        b.classList.add('active');
-        renderFlashcards();
-      });
-      fcFilters.appendChild(b);
-    });
-  }
 
   function renderFlashcards(){
     fcGrid.innerHTML = '';
@@ -1164,72 +1139,66 @@
       fcGrid.appendChild(card);
     });
   }
-  buildCategoryFilters();
   renderFlashcards();
 
   /* ---------------- Quiz ---------------- */
   // q = question · c = correct answer · w = 3 wrong answers · e = short explanation (shown after answering)
   var quizBank = {
-    /* ===== LEVEL 1 — EASY (25) ===== */
     1: [
-      {q:"Pathology is literally the study of what?", c:"Suffering (pathos)", w:["Healing (therapeia)","Cells (cytos)","Drugs (pharmakon)"]},
-      {q:"Pathophysiology mainly explains:", c:"The processes that produce a disease's signs and symptoms", w:["The drug regimen used to treat a disease","How often a disease occurs in a population","Which microorganism is present in a specimen"]},
-      {q:"Which definition best fits ‘disease’?", c:"Any condition that impairs the normal functioning of an organism or body", w:["Only a condition caused by a living microorganism","Only a change that can be seen on a radiograph","Any variation in appearance, even without altered function"]},
-      {q:"Which pathologist studies tissue removed during surgery, sometimes using frozen or paraffin sections?", c:"Surgical pathologist", w:["Clinical pathologist","Epidemiologist","Radiologist"]},
-      {q:"Hematology, bacteriology, chemistry, and serology make up the laboratory work of the:", c:"Clinical pathologist", w:["Surgical pathologist","Surgeon","Anesthesiologist"]},
-      {q:"General pathology deals with:", c:"Basic reactions of cells and tissues that underlie all disease, such as inflammation, injury, repair, and neoplasia", w:["Responses of one specific organ to a defined stimulus","Only inherited disease","Only the laboratory tests used in diagnosis"]},
-      {q:"Systemic pathology is the study of:", c:"Specific responses of individual organs and tissues to defined stimuli", w:["Basic reactions common to every disease","The statistical patterns of disease in populations","Only diseases that affect the whole body at once"]},
-      {q:"How many aspects of the disease process does the lecture list?", c:"Six", w:["Three","Four","Eight"]},
-      {q:"The cause(s) of a disease is called its:", c:"Etiology", w:["Pathogenesis","Morphology","Prognosis"]},
-      {q:"Which of these is a physical etiologic agent?", c:"Radiation", w:["Alcohol","Bacteria","Nutritional deficit"]},
-      {q:"Bacteria and viruses belong to which group of etiologic agents?", c:"Biologic", w:["Physical","Chemical","Nutritional"]},
-      {q:"Poisons and alcohol belong to which group of etiologic agents?", c:"Chemical", w:["Biologic","Physical","Nutritional"]},
-      {q:"Most diseases, such as cancer, heart disease, and diabetes, are best described as:", c:"Multifactorial", w:["Caused by a single specific agent","Always present at birth","Always of unknown cause"]},
-      {q:"A defect present at birth, even if it is not evident until later in life, is called:", c:"Congenital", w:["Acquired","Iatrogenic","Endemic"]},
-      {q:"A defect caused by events after birth, such as injury or infection, is called:", c:"Acquired", w:["Congenital","Idiopathic","Endemic"]},
-      {q:"A subjective complaint noted by the patient, such as pain or dizziness, is a:", c:"Symptom", w:["Sign","Syndrome","Sequela"]},
-      {q:"An objective finding noted by an observer, such as fever or a swollen extremity, is a:", c:"Sign", w:["Symptom","Complication","Lesion"]},
-      {q:"In the iceberg concept of disease, which layer forms the tip?", c:"Death", w:["Exposure without infection","Mild illness","Infection without clinical illness"]},
-      {q:"In the Tree of Medicine, general pathology forms the:", c:"Trunk", w:["Roots","Canopy","Seeds"]},
-      {q:"A list of possible diagnoses (‘rule-outs’) that could explain a case's findings is the:", c:"Differential diagnosis", w:["Definitive diagnosis","Clinical course","Normal value range"]},
-      {q:"Diabetes mellitus, emphysema, and arthritis are examples of:", c:"Chronic disease", w:["Acute disease","Preclinical disease","Pandemic disease"]},
-      {q:"A person who harbors a disease organism without symptoms but can still spread it is called a:", c:"Carrier", w:["Index case","Vector","Syndrome"]},
-      {q:"When new cases clearly exceed what recent experience would predict, the disease pattern is:", c:"Epidemic", w:["Endemic","Idiopathic","Preclinical"]},
-      {q:"H1N1 influenza and COVID-19 are given as examples of:", c:"Pandemics", w:["Endemic diseases","Congenital diseases","Chronic diseases"]},
-      {q:"A disease maintained in a population without the need for external input is:", c:"Endemic", w:["Epidemic","Pandemic","Iatrogenic"]}
+      {q:"Pathophysiology is best defined as the study of:", c:"The physiology of altered health", w:["Drug treatment of diseases", "Surgical techniques", "Laboratory chemistry"]},
+      {q:"The Greek word “pathos” means:", c:"Suffering", w:["Study", "Disease", "Health"]},
+      {q:"The Greek word “logos” means:", c:"Study", w:["Disease", "Suffering", "Treatment"]},
+      {q:"Pathology is devoted to the study of structural and functional changes in:", c:"Cells, tissues, and organs", w:["Drugs only", "Blood only", "Microorganisms only"]},
+      {q:"Pathophysiology explains the processes within the body that result in:", c:"Signs and symptoms of disease", w:["Drug toxicity only", "Surgical procedures", "Normal growth"]},
+      {q:"A specialist in pathology is called a:", c:"Pathologist", w:["Pharmacist", "Physiologist", "Surgeon"]},
+      {q:"A surgical pathologist studies disease primarily by analyzing:", c:"Tissue specimens obtained during surgery", w:["Blood pressure", "Urine samples only", "Drug concentrations"]},
+      {q:"Which of the following is a branch of clinical pathology?", c:"Hematology", w:["Anatomy", "Surgery", "Pharmacology"]},
+      {q:"Pathology is divided into:", c:"General and systemic pathology", w:["Acute and chronic pathology", "Clinical and surgical medicine", "Molecular and cellular pathology"]},
+      {q:"General pathology is concerned with:", c:"Basic reactions of cells and tissues to abnormal stimuli", w:["Responses of specialized organs only", "Surgical treatment of disease", "Drug development"]},
+      {q:"A condition that impairs the normal functioning of an organism or body is called:", c:"A disease", w:["A lesion", "A syndrome", "A sign"]},
+      {q:"Which of the following is an aspect of the disease process?", c:"All of the above", w:["Etiology", "Pathogenesis", "Morphologic changes"]},
+      {q:"The causes of disease are known as:", c:"Etiologic factors", w:["Risk factors", "Signs", "Sequelae"]},
+      {q:"Which is an example of a biologic etiologic agent?", c:"Bacteria", w:["Burn", "Poison", "Radiation"]},
+      {q:"Which of the following is an example of a physical force causing disease?", c:"Trauma", w:["Virus", "Alcohol", "Nutritional deficit"]},
+      {q:"Which of the following is an example of a chemical etiologic agent?", c:"Poison", w:["Radiation", "Trauma", "Bacteria"]},
+      {q:"Pathogenesis refers to:", c:"The sequence of events from the initial stimulus to the ultimate expression of disease", w:["The cause of disease only", "Treatment of disease", "The normal function of organs"]},
+      {q:"Morphology refers to the fundamental:", c:"Structure or form of cells or tissues", w:["Function of organs", "Treatment of disease", "Cause of disease"]},
+      {q:"A symptom is:", c:"A subjective complaint noted by the person with the disorder", w:["A manifestation noted by an observer", "A microscopic lesion", "A laboratory value"]},
+      {q:"Which of the following is an objective sign?", c:"Elevated temperature", w:["Pain", "Dizziness", "Difficulty breathing"]},
+      {q:"A compilation of signs and symptoms characteristic of a specific disease state is called:", c:"Syndrome", w:["Sequela", "Etiology", "Lesion"]},
+      {q:"A disease that persists over a long period is described as:", c:"Chronic", w:["Acute", "Preclinical", "Subacute"]},
+      {q:"A carrier is a person who:", c:"Harbors disease organisms without manifest symptoms", w:["Always has severe symptoms", "Has no disease organisms", "Has only acute disease"]},
+      {q:"Epidemiology studies the patterns, causes, and effects of health and disease conditions in:", c:"Defined populations", w:["Individual organs", "Laboratory animals only", "Surgical specimens"]},
+      {q:"An epidemic occurs when new cases of a disease:", c:"Substantially exceed what is expected during a given period", w:["Never occur", "Occur only in one patient", "Are always worldwide"]}
     ],
-
-    /* ===== LEVEL 2 — MEDIUM (15) ===== */
     2: [
-      {q:"In coronary heart disease, the progression from fatty streak to occlusive lesion in atherosclerosis is an example of:", c:"Pathogenesis", w:["Etiology","A sequela","A clinical diagnosis"], e:"Pathogenesis describes how a disease evolves; the true etiology of atherosclerosis remains largely uncertain."},
-      {q:"Which of the following is NOT one of the four recognized groups of etiologic agents?", c:"Idiopathic agents", w:["Biologic agents","Chemical agents","Nutritional factors"], e:"The four groups are biologic, physical, chemical, and nutritional. ‘Idiopathic’ means the cause is unknown."},
-      {q:"Why are most diseases considered multifactorial?", c:"One agent can affect several organs and several agents can affect one organ, so risk factors combine rather than a single cause acting", w:["Because every disease is present at birth","Because each disease has exactly one specific agent","Because the cause is always unknown"], e:"Agents are mostly non-specific, so contributing risk factors are involved."},
-      {q:"A defect present at birth is only noticed at age 30. It is classified as:", c:"Congenital, because it was present at birth", w:["Acquired, because it appeared later in life","Iatrogenic, because a physician found it","Idiopathic by definition"], e:"Congenital defects may not become evident until later; they are genetic, environmental, or both."},
-      {q:"Which list contains only causes of acquired defects?", c:"Injury, infection, inadequate nutrition, hypoxia, inappropriate immune response, neoplasia", w:["Genetic mutation, familial inheritance, maternal teratogens","Inherited metabolic error, chromosomal change, birth malformation","Congenital heart defect, genetic predisposition, inherited trait"], e:"Acquired defects arise from events after birth."},
-      {q:"A small sample of a lesion is removed to be examined under the microscope. This procedure is called a:", c:"Biopsy", w:["Sequela","Differential diagnosis","Syndrome"], e:"Lesions can be imaged (radiograph, ultrasound) or sampled by biopsy for histologic study."},
-      {q:"After major blood loss a patient has tachycardia. This finding is best classified as:", c:"A sign that reflects compensation for altered function", w:["A symptom reported subjectively","A sequela of the blood loss","A congenital manifestation"], e:"Signs/symptoms either relate directly to the primary disorder or represent compensation."},
-      {q:"In a patient with anemia, which pairing is correct?", c:"Pallor is a sign; fatigue is a symptom", w:["Pallor is a symptom; fatigue is a sign","Both pallor and fatigue are symptoms","Both pallor and fatigue are signs"], e:"Signs are objective, observer-noted; symptoms are subjective, patient-reported."},
-      {q:"A lesion or impairment remaining after a disease has run its course is called a:", c:"Sequela", w:["Complication","Syndrome","Carrier state"], e:"A complication is an adverse extension of disease or treatment; a sequela follows or is caused by the disease."},
-      {q:"A ‘normal’ laboratory value is statistically defined as:", c:"Mean ± 2 SD of a reference population (the 95% distribution)", w:["Mean ± 1 SD of the patient's own earlier results","Mean ± 3 SD of a hospitalized population","Any value the clinician has seen before"], e:"Normal values come from the 95% distribution of a reference population."},
-      {q:"In a 10-year-old with neck rigidity and vomiting, ‘inflammation of the pia mater and arachnoid’ is a:", c:"Morphologic diagnosis", w:["Clinical diagnosis","Etiologic diagnosis","Disease (definitive) diagnosis"], e:"Morphologic diagnosis is based on the predominant lesion."},
-      {q:"Which diagnosis type names the specific or general cause, such as ‘bacterial’ rather than ‘viral’?", c:"Etiologic diagnosis", w:["Clinical diagnosis","Morphologic diagnosis","Differential diagnosis"], e:"‘Bacterial meningitis’ is the etiologic diagnosis in the worked example."},
-      {q:"A patient has an illness of intermediate duration and severity, between acute and chronic, and may appear clinically well. This is:", c:"Subacute disease", w:["Preclinical disease","Acute disease","Carrier state"], e:"Preclinical means signs/symptoms are not yet adequate for a specific diagnosis."},
-      {q:"Which statement best describes acute disease?", c:"Sudden onset of usually severe symptoms that resolves into recovery, chronicity, or death", w:["A long-lasting course that never ends in recovery","A stage where no diagnosis can yet be made","Infection with no symptoms that still spreads to others"], e:"Chronic = long-lasting; preclinical = not yet diagnosable; carrier = asymptomatic but infective."},
-      {q:"In the Host–Pathogen–Treatment framework, the question ‘Where did it come from?’ mainly addresses:", c:"The source or reservoir of the pathogen, part of establishing etiology", w:["How the organism damages the host","How the organism spreads through the host","Which pathogen is present"], e:"‘What is the bug?’ = identity; ‘What does it do?’ = pathogenesis; ‘Where did it go?’ = spread in the host."}
+      {q:"Which statement best distinguishes pathology from pathophysiology according to the lecture?", c:"Pathology studies structural and functional changes underlying disease, whereas pathophysiology focuses on how altered physiology produces disease manifestations.", w:["Pathology deals only with treatment, whereas pathophysiology deals with diagnosis.", "Pathology studies only cells, whereas pathophysiology studies only organs.", "Both disciplines deal directly with treatment."]},
+      {q:"A pathologist evaluates diagnostic tests, uses materials obtained from living or dead patients, and also functions as a laboratory consultant. This description refers to the:", c:"Pathologist in general", w:["Surgical pathologist only", "Clinical pathologist only", "Physiologist"]},
+      {q:"During an operation, a tissue specimen is examined microscopically to help determine how the operation should be modified. Which specialist is most directly involved?", c:"Surgical pathologist", w:["Clinical pathologist", "Epidemiologist", "Pharmacologist"]},
+      {q:"A disease affecting one organ can have several different causes, while one disease-causing agent may affect several organs. This supports the concept that:", c:"Most disease states are multifactorial in origin", w:["All diseases have a single cause", "Disease causation is always genetic", "Etiology and pathogenesis are identical"]},
+      {q:"A patient has a genetic predisposition, and an environmental event triggers disease development. According to the lecture, this represents:", c:"A possible mechanism underlying many diseases", w:["A purely congenital condition", "A morphologic diagnosis", "A sequela"]},
+      {q:"Which sequence correctly represents the relationship between etiology and pathogenesis?", c:"Etiology describes what sets the disease process in motion; pathogenesis describes how it evolves.", w:["Etiology describes how disease evolves; pathogenesis describes what starts it.", "Both terms describe only morphologic changes.", "Pathogenesis refers only to disease treatment."]},
+      {q:"A tissue abnormality is evaluated by both gross examination and microscopic examination. These findings are examples of:", c:"Morphologic changes", w:["Clinical manifestations", "Etiologic factors", "Risk factors"]},
+      {q:"Which statement correctly distinguishes a symptom from a sign?", c:"A symptom is reported by the patient, whereas a sign can be observed by another person.", w:["A symptom is objective, whereas a sign is subjective.", "Both are subjective complaints.", "A sign can only be detected microscopically."]},
+      {q:"A patient with blood loss develops tachycardia. According to the lecture, the tachycardia may represent:", c:"The body’s attempt to compensate for altered function", w:["A morphologic lesion", "A congenital condition", "A sequela"]},
+      {q:"Which combination represents the usual diagnostic process described in the lecture?", c:"History → physical examination → laboratory/radiologic and other tests", w:["Surgery → treatment → history", "Histology → epidemiology → treatment", "Laboratory tests → symptoms → etiology"]},
+      {q:"Normal laboratory values are established statistically from test results obtained from a selected sample of people and refer to approximately:", c:"Mean ± 2 SD", w:["Mean ± 1 SD", "Mean ± 3 SD", "Median ± 2 SD"]},
+      {q:"A differential diagnosis is best described as:", c:"A list of diagnoses that could account for the history, signs, or lesions", w:["The final name of the disease", "The microscopic appearance of a lesion", "The cause of a disease"]},
+      {q:"A diagnosis describing a lesion as severe, acute, locally extensive, and fibrinous bronchopneumonia is primarily a:", c:"Morphologic diagnosis", w:["Clinical diagnosis", "Etiologic diagnosis", "Disease diagnosis"]},
+      {q:"A patient has a disease with a relatively sudden onset and usually severe symptoms. Which clinical course is most consistent with this description?", c:"Acute", w:["Preclinical", "Subacute", "Chronic"]},
+      {q:"Which sequence correctly represents increasing geographic spread of infectious disease?", c:"Endemic → epidemic → pandemic", w:["Pandemic → endemic → epidemic", "Epidemic → endemic → pandemic", "Chronic → acute → pandemic"]}
     ],
-
-    /* ===== LEVEL 3 — HARD (10) ===== */
     3: [
-      {q:"Which set contains ONLY intrinsic causes of disease?", c:"Inherited, metabolic, degenerative, psychogenic", w:["Metabolic, neoplastic, electricity, immunologic","Degenerative, iatrogenic, inherited, psychogenic","Congenital, nutritional-deficiency, bacterial, immunologic"], e:"Electricity, iatrogenic causes, and bacteria are extrinsic."},
-      {q:"Which statement about atherosclerosis and coronary heart disease is correct?", c:"Atherosclerosis (fatty streak to occlusive lesion) represents the pathogenesis, while its own etiology remains largely uncertain", w:["Atherosclerosis is the established etiology, and pathogenesis is unknown","Atherosclerosis is a sequela whose etiology is fully known","Both etiology and pathogenesis are completely established"], e:"Etiology = what starts the disease; pathogenesis = how it evolves."},
-      {q:"A patient with pneumonia shows a raised respiratory rate. The best interpretation is:", c:"An objective sign that may represent compensation rather than the primary lesion itself", w:["A subjective symptom that identifies the etiology","A sequela of the pneumonia","A morphologic diagnosis"], e:"Signs/symptoms are either primary-disorder-related or compensatory; this one is compensatory."},
-      {q:"Which statement about mean ± 2 SD normal ranges is correct?", c:"About 5% of healthy people fall outside the range, so an abnormal value does not by itself prove disease", w:["No healthy person can ever fall outside the range","Every value outside the range is diagnostic of disease","The range covers 100% of the healthy reference population"], e:"The normal range is the central 95% distribution of a reference population."},
-      {q:"In a 10-year-old with neck rigidity and vomiting, which matching is correct? (i) acute meningitis, (ii) inflammation of the pia mater and arachnoid, (iii) bacterial meningitis, (iv) Neisseria meningitidis", c:"i clinical, ii morphologic, iii etiologic, iv definitive", w:["i morphologic, ii clinical, iii etiologic, iv definitive","i clinical, ii etiologic, iii morphologic, iv definitive","i clinical, ii morphologic, iii definitive, iv etiologic"], e:"Clinical = history/signs/exam; morphologic = lesion; etiologic = cause; definitive = actual disease name."},
-      {q:"Which statement about clinical course is correct?", c:"Acute disease may resolve into recovery, a chronic phase, or death", w:["Subacute disease always has sudden, severe onset","A carrier cannot infect others because it has no symptoms","Chronic disease is always milder than acute disease and never fatal"], e:"Carriers can still spread infection; chronic disease can progress, disable, or prove fatal."},
-      {q:"Which statement about the iceberg concept of disease is correct?", c:"Only severe disease and death are readily visible; mild illness, infection without illness, and exposure without infection lie below the surface", w:["Counting hospitalized cases captures the full disease burden","Infection without clinical illness lies above mild illness","Exposure without infection forms the tip"], e:"The base is exposure without infection, then infection without illness, then mild illness, severe disease, death."},
-      {q:"Which scenario describes an epidemic that has become a pandemic?", c:"New cases exceed expectation in one population and then spread across multiple continents", w:["A disease persists at a stable baseline on several continents without outside input","A sudden rise in cases stays confined to one region","A disease present at birth is found on every continent"], e:"Endemic = steady baseline without external input; pandemic = epidemic spread over a large region (e.g. COVID-19)."},
-      {q:"Which classification fits the Tree of Medicine?", c:"Roots: immunology, genetics; trunk: general pathology; canopy: neurology, surgery", w:["Roots: radiology, histology; trunk: general pathology; canopy: physiology, surgery","Roots: microbiology, anatomy; trunk: systemic pathology; canopy: pediatrics, psychiatry","Roots: embryology, chemistry; trunk: general pathology; canopy: cell biology, dermatology"], e:"Radiology, surgery, neurology, pediatrics, and dermatology are canopy specialties; physiology and cell biology are roots."},
-      {q:"Which findings does the lecture figure highlight as signs of SEVERE anemia?", c:"Fainting, chest pain/angina, and heart attack", w:["Jaundice of the sclera, splenomegaly, and changed stool color","Pallor, coldness, and low blood pressure","Palpitations, shortness of breath, and general weakness"], e:"Central: fainting; heart: chest pain, angina, heart attack. The other options are findings of anemia in general."}
+      {q:"A disease agent affects several organs, while different agents can produce disease in the same organ. In addition, several predisposing factors are present in the patient. Which interpretation is most consistent with the lecture?", c:"The findings demonstrate that most diseases are multifactorial and that disease agents may be nonspecific.", w:["The disease must have a single specific etiologic agent.", "The condition can only be classified as congenital.", "The findings describe pathogenesis rather than etiology."]},
+      {q:"Atherosclerosis is described as the cause or etiology of coronary heart disease, but the progression from a fatty streak to an occlusive vessel lesion represents:", c:"Pathogenesis", w:["Etiology", "Clinical diagnosis", "Sequela"]},
+      {q:"A patient has no sufficiently developed signs or symptoms to permit a specific diagnosis. Later, the disease develops sudden, usually severe symptoms. Which sequence of clinical courses is represented?", c:"Preclinical → acute", w:["Chronic → preclinical → subacute", "Acute → preclinical", "Subacute → chronic → preclinical"]},
+      {q:"A patient presents with symptoms, physical findings, and a tissue lesion. The clinician lists several diseases that could account for these findings before reaching a final diagnosis. The list represents:", c:"Differential diagnosis", w:["Etiologic diagnosis", "Disease diagnosis", "Morphologic diagnosis"]},
+      {q:"A tissue diagnosis describes a lesion as severe, acute, locally extensive, and fibrinous bronchopneumonia. Which information is being emphasized?", c:"The severity, duration, distribution, location, and nature of the lesion", w:["Only the cause of disease", "Only the patient’s symptoms", "Only the patient’s laboratory values"]},
+      {q:"A disease is clinically silent at onset and is discovered during examination for another purpose. Which statement best explains this presentation according to the lecture?", c:"Some diseases may be silent initially and detected later or incidentally.", w:["All diseases necessarily produce early obvious manifestations.", "The disease must be congenital.", "The disease cannot produce morphologic changes."]},
+      {q:"A patient’s disease produces no directly visible abnormality of the heart or kidney, but the patient develops tachycardia or an increased respiratory rate. According to the lecture, these findings are best interpreted as:", c:"Compensatory manifestations of altered function", w:["Direct visualization of the diseased organ", "Congenital defects", "Morphologic diagnoses"]},
+      {q:"A diagnostic test result is interpreted by comparing it with statistically established reference values representing approximately 95% of the reference population. Which range is being described?", c:"Mean ± 2 SD", w:["Mean ± 1 SD", "Mean ± 3 SD", "Mean ± 4 SD"]},
+      {q:"A disease remains continuously maintained within a population without requiring external inputs. If cases then substantially exceed what is expected during a specified period, and later spread across multiple continents, the sequence is:", c:"Endemic → epidemic → pandemic", w:["Epidemic → endemic → pandemic", "Pandemic → epidemic → endemic", "Endemic → pandemic → epidemic"]},
+      {q:"Which statement best integrates morphology with clinical manifestations?", c:"Morphologic changes and their distribution influence normal function and therefore contribute to the clinical features, course, and prognosis of disease.", w:["Morphologic changes are independent of disease function and prognosis.", "Morphology describes only the etiology of disease.", "Morphology is limited to laboratory test results."]}
     ]
   };
 
